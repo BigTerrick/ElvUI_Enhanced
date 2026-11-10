@@ -41,7 +41,20 @@ local index = 0
 local deathList = {}
 local eventList = {}
 
-local function AddEvent(timestamp, event, sourceName, spellId, spellName, environmentalType, amount, overkill, school, resisted, blocked, absorbed)
+local function AddEvent(
+	timestamp,
+	event,
+	sourceName,
+	spellId,
+	spellName,
+	environmentalType,
+	amount,
+	overkill,
+	school,
+	resisted,
+	blocked,
+	absorbed
+)
 	if index > 0 and eventList[index].timestamp + 10 <= timestamp then
 		index = 0
 		twipe(eventList)
@@ -97,7 +110,7 @@ local function AddDeath()
 		deathList[deathIndex] = CopyTable(eventList)
 		EraseEvents()
 
-		DEFAULT_CHAT_FRAME:AddMessage("|cff71d5ff|Hdeath:"..deathIndex.."|h["..L["You died."].."]|h|r")
+		DEFAULT_CHAT_FRAME:AddMessage("|cff71d5ff|Hdeath:" .. deathIndex .. "|h[" .. L["You died."] .. "]|h|r")
 
 		return true
 	end
@@ -106,7 +119,9 @@ end
 local function GetDeathEvents(recapID)
 	if recapID and deathList[recapID] then
 		local deathEvents = deathList[recapID]
-		tsort(deathEvents, function(a, b) return a.timestamp > b.timestamp end)
+		tsort(deathEvents, function(a, b)
+			return a.timestamp > b.timestamp
+		end)
 		return deathEvents
 	end
 end
@@ -126,11 +141,11 @@ local function GetTableInfo(data)
 		nameIsNotSpell = true
 	elseif event == "RANGE_DAMAGE" then
 		nameIsNotSpell = true
---	elseif sub(event, 1, 5) == "SPELL" then
+	--	elseif sub(event, 1, 5) == "SPELL" then
 	elseif event == "ENVIRONMENTAL_DAMAGE" then
 		local environmentalType = data.environmentalType
 		environmentalType = upper(environmentalType)
-		spellName = _G["ACTION_ENVIRONMENTAL_DAMAGE_"..environmentalType]
+		spellName = _G["ACTION_ENVIRONMENTAL_DAMAGE_" .. environmentalType]
 		nameIsNotSpell = true
 
 		if environmentalType == "DROWNING" then
@@ -170,7 +185,9 @@ local function OpenRecap(recapID)
 	end
 
 	local deathEvents = GetDeathEvents(recapID)
-	if not deathEvents then return end
+	if not deathEvents then
+		return
+	end
 
 	self.recapID = recapID
 	self:Show()
@@ -211,15 +228,15 @@ local function OpenRecap(recapID)
 				dmgInfo.amount = evtData.amount - evtData.overkill
 			end
 			if evtData.absorbed and evtData.absorbed > 0 then
-				dmgInfo.dmgExtraStr = dmgInfo.dmgExtraStr.." "..format(L["(%d Absorbed)"], evtData.absorbed)
+				dmgInfo.dmgExtraStr = dmgInfo.dmgExtraStr .. " " .. format(L["(%d Absorbed)"], evtData.absorbed)
 				dmgInfo.amount = evtData.amount - evtData.absorbed
 			end
 			if evtData.resisted and evtData.resisted > 0 then
-				dmgInfo.dmgExtraStr = dmgInfo.dmgExtraStr.." "..format(L["(%d Resisted)"], evtData.resisted)
+				dmgInfo.dmgExtraStr = dmgInfo.dmgExtraStr .. " " .. format(L["(%d Resisted)"], evtData.resisted)
 				dmgInfo.amount = evtData.amount - evtData.resisted
 			end
 			if evtData.blocked and evtData.blocked > 0 then
-				dmgInfo.dmgExtraStr = dmgInfo.dmgExtraStr.." "..format(L["(%d Blocked)"], evtData.blocked)
+				dmgInfo.dmgExtraStr = dmgInfo.dmgExtraStr .. " " .. format(L["(%d Blocked)"], evtData.blocked)
 				dmgInfo.amount = evtData.amount - evtData.blocked
 			end
 
@@ -291,7 +308,9 @@ local function Amount_OnEnter(self)
 	GameTooltip:ClearLines()
 
 	if self.amount then
-		local valueStr = self.school and format(TEXT_MODE_A_STRING_VALUE_SCHOOL, self.amount, CombatLog_String_SchoolString(self.school)) or self.amount
+		local valueStr = self.school
+				and format(TEXT_MODE_A_STRING_VALUE_SCHOOL, self.amount, CombatLog_String_SchoolString(self.school))
+			or self.amount
 		GameTooltip:AddLine(format(L["%s %s"], valueStr, self.dmgExtraStr), 1, 0, 0, false)
 	end
 
@@ -305,7 +324,13 @@ local function Amount_OnEnter(self)
 
 	local seconds = ElvUI_DeathRecapFrame.DeathTimeStamp - self.timestamp
 	if seconds > 0 then
-		GameTooltip:AddLine(format(L["%s sec before death at %s%% health."], format("%.1F", seconds), self.hpPercent), 1, 0.824, 0, true)
+		GameTooltip:AddLine(
+			format(L["%s sec before death at %s%% health."], format("%.1F", seconds), self.hpPercent),
+			1,
+			0.824,
+			0,
+			true
+		)
 	else
 		GameTooltip:AddLine(format(L["Killing blow at %s%% health."], self.hpPercent), 1, 0.824, 0, true)
 	end
@@ -330,16 +355,35 @@ function mod:PLAYER_DEAD()
 	end
 end
 
-function mod:COMBAT_LOG_EVENT_UNFILTERED(_, timestamp, event, _, sourceName, sourceFlags, destGUID, destName, destFlags, ...)
-	if (band(destFlags, COMBATLOG_FILTER_ME) ~= COMBATLOG_FILTER_ME) or (band(sourceFlags, COMBATLOG_FILTER_ME) == COMBATLOG_FILTER_ME) then return end
-	if event ~= "ENVIRONMENTAL_DAMAGE"
-	and event ~= "RANGE_DAMAGE"
-	and event ~= "SPELL_DAMAGE"
-	and event ~= "SPELL_EXTRA_ATTACKS"
-	and event ~= "SPELL_INSTAKILL"
-	and event ~= "SPELL_PERIODIC_DAMAGE"
-	and event ~= "SWING_DAMAGE"
-	then return end
+function mod:COMBAT_LOG_EVENT_UNFILTERED(
+	_,
+	timestamp,
+	event,
+	_,
+	sourceName,
+	sourceFlags,
+	destGUID,
+	destName,
+	destFlags,
+	...
+)
+	if
+		(band(destFlags, COMBATLOG_FILTER_ME) ~= COMBATLOG_FILTER_ME)
+		or (band(sourceFlags, COMBATLOG_FILTER_ME) == COMBATLOG_FILTER_ME)
+	then
+		return
+	end
+	if
+		event ~= "ENVIRONMENTAL_DAMAGE"
+		and event ~= "RANGE_DAMAGE"
+		and event ~= "SPELL_DAMAGE"
+		and event ~= "SPELL_EXTRA_ATTACKS"
+		and event ~= "SPELL_INSTAKILL"
+		and event ~= "SPELL_PERIODIC_DAMAGE"
+		and event ~= "SWING_DAMAGE"
+	then
+		return
+	end
 
 	local subVal = sub(event, 1, 5)
 	local environmentalType, spellId, spellName, amount, overkill, school, resisted, blocked, absorbed
@@ -352,9 +396,24 @@ function mod:COMBAT_LOG_EVENT_UNFILTERED(_, timestamp, event, _, sourceName, sou
 		environmentalType, amount, overkill, school, resisted, blocked, absorbed = ...
 	end
 
-	if not tonumber(amount) then return end
+	if not tonumber(amount) then
+		return
+	end
 
-	AddEvent(timestamp, event, sourceName, spellId, spellName, environmentalType, amount, overkill, school, resisted, blocked, absorbed)
+	AddEvent(
+		timestamp,
+		event,
+		sourceName,
+		spellId,
+		spellName,
+		environmentalType,
+		amount,
+		overkill,
+		school,
+		resisted,
+		blocked,
+		absorbed
+	)
 end
 
 function mod:SetItemRef(link, ...)
@@ -368,8 +427,12 @@ function mod:SetItemRef(link, ...)
 end
 
 function mod:DeathRecap()
-	if DeathRecapFrame then return end
-	if not E.private.enhanced.deathRecap then return end
+	if DeathRecapFrame then
+		return
+	end
+	if not E.private.enhanced.deathRecap then
+		return
+	end
 
 	local S = E:GetModule("Skins")
 
@@ -380,7 +443,9 @@ function mod:DeathRecap()
 	frame:SetTemplate("Transparent")
 	frame:SetMovable(true)
 	frame:Hide()
-	frame:SetScript("OnHide", function(self) self.recapID = nil end)
+	frame:SetScript("OnHide", function(self)
+		self.recapID = nil
+	end)
 	tinsert(UISpecialFrames, frame:GetName())
 
 	frame.Title = frame:CreateFontString("ARTWORK", nil, "GameFontNormal")
@@ -394,15 +459,21 @@ function mod:DeathRecap()
 	frame.CloseXButton = CreateFrame("Button", "$parentCloseXButton", frame)
 	frame.CloseXButton:Size(32, 32)
 	frame.CloseXButton:Point("TOPRIGHT", 2, 1)
-	frame.CloseXButton:SetScript("OnClick", function(self) self:GetParent():Hide() end)
+	frame.CloseXButton:SetScript("OnClick", function(self)
+		self:GetParent():Hide()
+	end)
 	S:HandleCloseButton(frame.CloseXButton)
 
 	frame.DragButton = CreateFrame("Button", "$parentDragButton", frame)
 	frame.DragButton:Point("TOPLEFT", 0, 0)
 	frame.DragButton:Point("BOTTOMRIGHT", frame, "TOPRIGHT", 0, -32)
 	frame.DragButton:RegisterForDrag("LeftButton")
-	frame.DragButton:SetScript("OnDragStart", function(self) self:GetParent():StartMoving() end)
-	frame.DragButton:SetScript("OnDragStop", function(self) self:GetParent():StopMovingOrSizing() end)
+	frame.DragButton:SetScript("OnDragStart", function(self)
+		self:GetParent():StartMoving()
+	end)
+	frame.DragButton:SetScript("OnDragStop", function(self)
+		self:GetParent():StopMovingOrSizing()
+	end)
 
 	frame.DeathRecapEntry = {}
 
@@ -476,7 +547,9 @@ function mod:DeathRecap()
 	frame.CloseButton:Size(144, 21)
 	frame.CloseButton:Point("BOTTOM", 0, 15)
 	frame.CloseButton:SetText(CLOSE)
-	frame.CloseButton:SetScript("OnClick", function(self) ElvUI_DeathRecapFrame:Hide() end)
+	frame.CloseButton:SetScript("OnClick", function(self)
+		ElvUI_DeathRecapFrame:Hide()
+	end)
 	S:HandleButton(frame.CloseButton)
 
 	self:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
@@ -564,7 +637,7 @@ function mod:DeathRecap()
 		end,
 		OnUpdate = function(self, elapsed)
 			if self.timeleft > 0 then
-				local text = _G[self:GetName().."Text"]
+				local text = _G[self:GetName() .. "Text"]
 				local timeleft = self.timeleft
 				if timeleft < 60 then
 					text:SetFormattedText(DEATH_RELEASE_TIMER, timeleft, SECONDS)
@@ -593,6 +666,6 @@ function mod:DeathRecap()
 		interruptCinematic = 1,
 		noCancelOnReuse = 1,
 		hideOnEscape = false,
-		noCloseOnAlt = true
+		noCloseOnAlt = true,
 	}
 end

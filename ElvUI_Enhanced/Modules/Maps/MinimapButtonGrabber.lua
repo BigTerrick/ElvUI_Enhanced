@@ -78,7 +78,7 @@ local buttonFunctions = {
 	"SetScale",
 	"SetSize",
 	"SetWidth",
-	"SetHeight"
+	"SetHeight",
 }
 
 local function OnEnter()
@@ -129,20 +129,44 @@ function MBG:GetVisibleList()
 	return t
 end
 
+local function GetFrameChildren(frame)
+	return { frame:GetChildren() }
+end
+
 function MBG:GrabMinimapButtons()
 	for _, frame in ipairs(self.minimapFrames) do
-		for i = 1, frame:GetNumChildren() do
-			local object = select(i, frame:GetChildren())
+		local numChildren = frame:GetNumChildren()
 
-			if object and object:IsObjectType("Button") then
-				self:SkinMinimapButton(object)
+		if numChildren ~= self.numChildren[frame] then
+			-- GetChildren() returns every child at once; addons like Questie parent
+			-- thousands of pin frames to the Minimap, and past ~8000 children the
+			-- call itself throws "Stack overflow". Guard it and skip the frame
+			-- until its child count changes again.
+			local success, children = pcall(GetFrameChildren, frame)
+
+			self.numChildren[frame] = numChildren
+
+			if success then
+				for i = 1, #children do
+					local object = children[i]
+
+					if object:IsObjectType("Button") then
+						self:SkinMinimapButton(object)
+					end
+				end
 			end
 		end
 	end
 
-	if AtlasButtonFrame then self:SkinMinimapButton(AtlasButton) end
-	if FishingBuddyMinimapFrame then self:SkinMinimapButton(FishingBuddyMinimapButton) end
-	if HealBot_MMButton then self:SkinMinimapButton(HealBot_MMButton) end
+	if AtlasButtonFrame then
+		self:SkinMinimapButton(AtlasButton)
+	end
+	if FishingBuddyMinimapFrame then
+		self:SkinMinimapButton(FishingBuddyMinimapButton)
+	end
+	if HealBot_MMButton then
+		self:SkinMinimapButton(HealBot_MMButton)
+	end
 
 	if self.needUpdate or self:CheckVisibility() then
 		self:UpdateLayout()
@@ -150,10 +174,14 @@ function MBG:GrabMinimapButtons()
 end
 
 function MBG:SkinMinimapButton(button)
-	if not button or button.isSkinned then return end
+	if not button or button.isSkinned then
+		return
+	end
 
 	local name = button:GetName()
-	if not name then return end
+	if not name then
+		return
+	end
 
 	if button:IsObjectType("Button") then
 		local validIcon
@@ -166,14 +194,20 @@ function MBG:SkinMinimapButton(button)
 		end
 
 		if not validIcon then
-			if ignoreButtons[name] then return end
+			if ignoreButtons[name] then
+				return
+			end
 
 			for i = 1, #genericIgnores do
-				if sub(name, 1, len(genericIgnores[i])) == genericIgnores[i] then return end
+				if sub(name, 1, len(genericIgnores[i])) == genericIgnores[i] then
+					return
+				end
 			end
 
 			for i = 1, #partialIgnores do
-				if find(name, partialIgnores[i]) then return end
+				if find(name, partialIgnores[i]) then
+					return
+				end
 			end
 		end
 
@@ -210,7 +244,9 @@ function MBG:SkinMinimapButton(button)
 				region:ClearAllPoints()
 				region:SetInside()
 				region:SetTexCoord(unpack(E.TexCoords))
-				button:HookScript("OnLeave", function() region:SetTexCoord(unpack(E.TexCoords)) end)
+				button:HookScript("OnLeave", function()
+					region:SetTexCoord(unpack(E.TexCoords))
+				end)
 
 				region:SetDrawLayer("ARTWORK")
 				region.SetPoint = E.noop
@@ -240,7 +276,9 @@ function MBG:SkinMinimapButton(button)
 end
 
 function MBG:UpdateLayout()
-	if #self.skinnedButtons == 0 then return end
+	if #self.skinnedButtons == 0 then
+		return
+	end
 
 	local db = E.db.enhanced.minimap.buttonGrabber
 	local spacing = (db.backdrop and (E.Border + db.backdropSpacing) or E.Spacing)
@@ -371,7 +409,9 @@ local addonFixes = {
 	end,
 	["DBM-Core"] = function()
 		local button = DBMMinimapButton
-		if not button then return end
+		if not button then
+			return
+		end
 
 		if button:GetScript("OnMouseDown") then
 			button:SetScript("OnMouseDown", nil)
@@ -379,7 +419,9 @@ local addonFixes = {
 		end
 	end,
 	["Enchantrix"] = function()
-		if not Enchantrix or EnxMiniMapIcon then return end
+		if not Enchantrix or EnxMiniMapIcon then
+			return
+		end
 
 		local settings = Enchantrix.Settings
 		local oldButton = Enchantrix.MiniIcon
@@ -388,7 +430,7 @@ local addonFixes = {
 		newButton:Size(20)
 		newButton:SetToplevel(true)
 		newButton:SetFrameStrata("LOW")
-		newButton:Point("RIGHT", Minimap, "LEFT", 0,0)
+		newButton:Point("RIGHT", Minimap, "LEFT", 0, 0)
 		newButton:RegisterForClicks("LeftButtonUp", "RightButtonUp")
 
 		newButton.icon = oldButton.icon
@@ -423,17 +465,20 @@ local addonFixes = {
 				newButton:Hide()
 			end
 		end
-	end
+	end,
 }
 
 function MBG:Initialize()
-	if not E.private.enhanced.minimapButtonGrabber then return end
+	if not E.private.enhanced.minimapButtonGrabber then
+		return
+	end
 
 	local db = E.db.enhanced.minimap.buttonGrabber
 	local spacing = (db.backdrop and (E.Border + db.backdropSpacing) or E.Spacing)
 
 	self.skinnedButtons = {}
-	self.minimapFrames = {Minimap, MinimapBackdrop}
+	self.minimapFrames = { Minimap, MinimapBackdrop }
+	self.numChildren = {}
 
 	self.frame = CreateFrame("Frame", "ElvUI_MinimapButtonGrabber", UIParent)
 	self.frame:Size(db.buttonSize + (spacing * 2))

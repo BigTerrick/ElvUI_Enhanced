@@ -33,7 +33,7 @@ local errata = {
 		["THEHEADLAND"] = 506061853861,
 		["THEUPLANDS"] = 83162767595,
 	},
---[[
+	--[[
 	["AlteracValley"] = {
 		["DUNBALDAR"] = 14323794190,
 		["FROSTWOLFKEEP"] = 403071863019,
@@ -1052,7 +1052,7 @@ local function UpdateOverlayTextures(frame, frameName, textureCache, scale, r, g
 		return
 	end
 
-	local pathPrefix = [[Interface\WorldMap\]]..mapFileName..[[\]]
+	local pathPrefix = [[Interface\WorldMap\]] .. mapFileName .. [[\]]
 	local overlayMap = errata[mapFileName]
 	local numOverlays = GetNumMapOverlays()
 	local pathLen = len(pathPrefix) + 1
@@ -1071,7 +1071,7 @@ local function UpdateOverlayTextures(frame, frameName, textureCache, scale, r, g
 				discoveredOverlays[texName] = true
 
 				if not overlayMap[texName] then
-					local texID = texWidth + texHeight * 2^10 + offsetX * 2^20 + offsetY * 2^30
+					local texID = texWidth + texHeight * 2 ^ 10 + offsetX * 2 ^ 20 + offsetY * 2 ^ 30
 
 					if texID ~= 0 and texID ~= 131200 then
 						overlayMap[texName] = texID
@@ -1086,7 +1086,11 @@ local function UpdateOverlayTextures(frame, frameName, textureCache, scale, r, g
 
 	for texName, texID in pairs(overlayMap) do
 		local textureName = pathPrefix .. texName
-		local textureWidth, textureHeight, offsetX, offsetY = fmod(texID, 2^10), fmod(floor(texID / 2^10), 2^10), fmod(floor(texID / 2^20), 2^10), floor(texID / 2^30)
+		local textureWidth, textureHeight, offsetX, offsetY =
+			fmod(texID, 2 ^ 10),
+			fmod(floor(texID / 2 ^ 10), 2 ^ 10),
+			fmod(floor(texID / 2 ^ 20), 2 ^ 10),
+			floor(texID / 2 ^ 30)
 
 		local numTexturesWide = ceil(textureWidth / 256)
 		local numTexturesTall = ceil(textureHeight / 256)
@@ -1170,7 +1174,9 @@ local function UpdateOverlayTextures(frame, frameName, textureCache, scale, r, g
 end
 
 function FC:UpdateWorldMapOverlays()
-	if not WorldMapFrame:IsShown() then return end
+	if not WorldMapFrame:IsShown() then
+		return
+	end
 
 	if NUM_WORLDMAP_OVERLAYS > self.NUM_WORLDMAP_OVERLAYS then
 		for i = self.NUM_WORLDMAP_OVERLAYS + 1, NUM_WORLDMAP_OVERLAYS do
@@ -1181,7 +1187,16 @@ function FC:UpdateWorldMapOverlays()
 	end
 
 	local color = E.db.enhanced.map.fogClear.color
-	UpdateOverlayTextures(WorldMapDetailFrame, "WorldMapOverlay%d", worldMapCache, 1, color.r, color.g, color.b, color.a)
+	UpdateOverlayTextures(
+		WorldMapDetailFrame,
+		"WorldMapOverlay%d",
+		worldMapCache,
+		1,
+		color.r,
+		color.g,
+		color.b,
+		color.a
+	)
 end
 
 function FC:UpdateFog()
@@ -1216,9 +1231,13 @@ end
 
 function FC:Initialize()
 	local _, _, _, enabled, _, reason = GetAddOnInfo("Mapster")
-	if reason ~= "MISSED" and enabled then return end
+	if reason ~= "MISSED" and enabled then
+		return
+	end
 
-	if not E.db.enhanced.map.fogClear.enable then return end
+	if not E.db.enhanced.map.fogClear.enable then
+		return
+	end
 
 	self:UpdateFog()
 end

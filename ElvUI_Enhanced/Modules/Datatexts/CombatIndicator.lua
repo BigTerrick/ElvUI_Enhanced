@@ -16,4 +16,13 @@ local function OnEvent(self, event, ...)
 	self.text:SetTextColor(1, 1, 1)
 end
 
-DT:RegisterDatatext("Combat Indicator", {"PLAYER_ENTERING_WORLD", "PLAYER_REGEN_ENABLED", "PLAYER_REGEN_DISABLED"}, OnEvent, nil, nil, nil, nil, EE:ColorizeSettingName(L["Combat Indicator"]))
+DT:RegisterDatatext(
+	"Combat Indicator",
+	{ "PLAYER_ENTERING_WORLD", "PLAYER_REGEN_ENABLED", "PLAYER_REGEN_DISABLED" },
+	OnEvent,
+	nil,
+	nil,
+	nil,
+	nil,
+	EE:ColorizeSettingName(L["Combat Indicator"])
+)

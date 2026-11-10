@@ -27,27 +27,27 @@ local channelEvents = {
 }
 
 local spamFirstLines = {
-	"^Recount - (.*)$",				-- Recount
-	"^Skada: (.*) for (.*):$",		-- Skada enUS
-	"^Skada: (.*) por (.*):$",		-- Skada esES/ptBR
-	"^Skada: (.*) für (.*):$",		-- Skada deDE
---	"^Skada: (.*) fur (.*):$",		-- Skada deDE
-	"^Skada: (.*) pour (.*):$",		-- Skada frFR
-	"^Skada: (.*) для (.*):$",		-- Skada ruRU
---	"^Skada: (.*) per (.*):$",		-- Skada itIT
-	"^(.*) 의 Skada 보고 (.*):$",	-- Skada koKR
-	"^Отчёт Skada: (.*), с (.*):$",	-- Skada ruRU
-	"^Skada报告(.*)的(.*):$",		-- Skada zhCN
-	"^Skada:(.*)來自(.*):$",			-- Skada zhTW
-	"^(.*) Done for (.*)$",			-- TinyDPS
-	"^Details!:(.*)$" -- Details!
+	"^Recount - (.*)$", -- Recount
+	"^Skada: (.*) for (.*):$", -- Skada enUS
+	"^Skada: (.*) por (.*):$", -- Skada esES/ptBR
+	"^Skada: (.*) für (.*):$", -- Skada deDE
+	--	"^Skada: (.*) fur (.*):$",		-- Skada deDE
+	"^Skada: (.*) pour (.*):$", -- Skada frFR
+	"^Skada: (.*) для (.*):$", -- Skada ruRU
+	--	"^Skada: (.*) per (.*):$",		-- Skada itIT
+	"^(.*) 의 Skada 보고 (.*):$", -- Skada koKR
+	"^Отчёт Skada: (.*), с (.*):$", -- Skada ruRU
+	"^Skada报告(.*)的(.*):$", -- Skada zhCN
+	"^Skada:(.*)來自(.*):$", -- Skada zhTW
+	"^(.*) Done for (.*)$", -- TinyDPS
+	"^Details!:(.*)$", -- Details!
 }
 
 local spamNextLines = {
-	"^(%d+)%. (.*)$",	-- Recount, Skada
-	"^ (%d+). (.*)$",	-- Skada
---	"^(.*)   (.*)$",	-- Additional Skada
-	"^.*%%%)$",			-- Skada player details
+	"^(%d+)%. (.*)$", -- Recount, Skada
+	"^ (%d+). (.*)$", -- Skada
+	--	"^(.*)   (.*)$",	-- Additional Skada
+	"^.*%%%)$", -- Skada player details
 	"^(%d+). (.*):(.*)(%d+)(.*)(%d+)%%(.*)%((%d+)%)$", -- TinyDPS
 }
 
@@ -69,7 +69,7 @@ function EDL:FilterLine(event, source, msg, ...)
 					end
 
 					if toInsert then
-						tinsert(meter.data,msg)
+						tinsert(meter.data, msg)
 					end
 
 					return true, false, nil
@@ -98,7 +98,7 @@ function EDL:FilterLine(event, source, msg, ...)
 				end
 			end
 
-			tinsert(self.Meters, {src = source, evt = event, time = curTime, data = {}, title = msg})
+			tinsert(self.Meters, { src = source, evt = event, time = curTime, data = {}, title = msg })
 
 			for id, meter in ipairs(self.Meters) do
 				if meter.src == source and meter.evt == event and meter.time == curTime then
@@ -153,7 +153,9 @@ function EDL:SetItemRef(link, text, button, chatframe)
 end
 
 function EDL:ItemRefTooltip_SetHyperlink(tt, link, ...)
-	if link:sub(0, 4) == "EDL:" then return end
+	if link:sub(0, 4) == "EDL:" then
+		return
+	end
 
 	return EDL.hooks[tt].SetHyperlink(tt, link, ...)
 end

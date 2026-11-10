@@ -9,9 +9,9 @@ SlashCmdList.ANALYZE = function(arg)
 	if arg and arg:GetName() then
 		ChatFrame1:AddMessage("|cffCC0000----------------------------")
 		ChatFrame1:AddMessage(arg:GetName())
-		for _, child in ipairs({arg:GetChildren()}) do
+		for _, child in ipairs({ arg:GetChildren() }) do
 			if child:GetName() then
-				ChatFrame1:AddMessage("+="..child:GetName())
+				ChatFrame1:AddMessage("+=" .. child:GetName())
 			end
 		end
 		ChatFrame1:AddMessage("|cffCC0000----------------------------")

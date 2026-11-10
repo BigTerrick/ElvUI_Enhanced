@@ -15,29 +15,29 @@ local displayString = ""
 local lastPanel
 
 local slots = {
-	{"HeadSlot", HEADSLOT},
-	{"NeckSlot", NECKSLOT},
-	{"ShoulderSlot", SHOULDERSLOT},
-	{"BackSlot", BACKSLOT},
-	{"ChestSlot", CHESTSLOT},
-	{"WristSlot", WRISTSLOT},
-	{"HandsSlot", HANDSSLOT},
-	{"WaistSlot", WAISTSLOT},
-	{"LegsSlot", LEGSSLOT},
-	{"FeetSlot", FEETSLOT},
-	{"Finger0Slot", FINGER0SLOT_UNIQUE},
-	{"Finger1Slot", FINGER1SLOT_UNIQUE},
-	{"Trinket0Slot", TRINKET0SLOT_UNIQUE},
-	{"Trinket1Slot", TRINKET1SLOT_UNIQUE},
-	{"MainHandSlot", MAINHANDSLOT},
-	{"SecondaryHandSlot", SECONDARYHANDSLOT},
-	{"RangedSlot", RANGEDSLOT}
+	{ "HeadSlot", HEADSLOT },
+	{ "NeckSlot", NECKSLOT },
+	{ "ShoulderSlot", SHOULDERSLOT },
+	{ "BackSlot", BACKSLOT },
+	{ "ChestSlot", CHESTSLOT },
+	{ "WristSlot", WRISTSLOT },
+	{ "HandsSlot", HANDSSLOT },
+	{ "WaistSlot", WAISTSLOT },
+	{ "LegsSlot", LEGSSLOT },
+	{ "FeetSlot", FEETSLOT },
+	{ "Finger0Slot", FINGER0SLOT_UNIQUE },
+	{ "Finger1Slot", FINGER1SLOT_UNIQUE },
+	{ "Trinket0Slot", TRINKET0SLOT_UNIQUE },
+	{ "Trinket1Slot", TRINKET1SLOT_UNIQUE },
+	{ "MainHandSlot", MAINHANDSLOT },
+	{ "SecondaryHandSlot", SECONDARYHANDSLOT },
+	{ "RangedSlot", RANGEDSLOT },
 }
 
 local levelColors = {
-	[0] = {1, 0, 0},
-	[1] = {0, 1, 0},
-	[2] = {1, 1, 0.5}
+	[0] = { 1, 0, 0 },
+	[1] = { 0, 1, 0 },
+	[2] = { 1, 1, 0.5 },
 }
 
 local function GetItemLvL()
@@ -86,7 +86,8 @@ local function OnEnter(self)
 			r, g, b = GetItemQualityColor(quality)
 
 			if itemLevel and avgEquipItemLevel then
-				color = levelColors[(itemLevel < avgEquipItemLevel - 5 and 0 or (itemLevel > avgEquipItemLevel + 5 and 1 or 2))]
+				color =
+					levelColors[(itemLevel < avgEquipItemLevel - 5 and 0 or (itemLevel > avgEquipItemLevel + 5 and 1 or 2))]
 				DT.tooltip:AddDoubleLine(slots[i][2], itemLevel, r, g, b, color[1], color[2], color[3])
 			end
 		end
@@ -104,4 +105,13 @@ local function ValueColorUpdate(hex)
 end
 E.valueColorUpdateFuncs[ValueColorUpdate] = true
 
-DT:RegisterDatatext("Item Level", {"PLAYER_ENTERING_WORLD", "PLAYER_EQUIPMENT_CHANGED", "UNIT_INVENTORY_CHANGED"}, OnEvent, nil, nil, OnEnter, nil, EE:ColorizeSettingName(L["Item Level"]))
+DT:RegisterDatatext(
+	"Item Level",
+	{ "PLAYER_ENTERING_WORLD", "PLAYER_EQUIPMENT_CHANGED", "UNIT_INVENTORY_CHANGED" },
+	OnEvent,
+	nil,
+	nil,
+	OnEnter,
+	nil,
+	EE:ColorizeSettingName(L["Item Level"])
+)

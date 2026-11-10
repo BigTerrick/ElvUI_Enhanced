@@ -22,7 +22,12 @@ local function ShowLevel()
 			if not isHeader then
 				if questLogTitle.groupMates:IsShown() then
 					questLogTitle.groupMates:Hide()
-					questLogTitle:SetFormattedText("|cff4F8CC9%s|r[%d] %s", questLogTitle.groupMates:GetText() or "", level, title)
+					questLogTitle:SetFormattedText(
+						"|cff4F8CC9%s|r[%d] %s",
+						questLogTitle.groupMates:GetText() or "",
+						level,
+						title
+					)
 				else
 					questLogTitle:SetFormattedText("[%d] %s", level, title)
 				end
@@ -34,7 +39,9 @@ local function ShowLevel()
 end
 
 function M:QuestLevelToggle()
-	if IsAddOnLoaded("QuestGuru") then return end
+	if IsAddOnLoaded("QuestGuru") then
+		return
+	end
 
 	local enabled = E.db.enhanced.general.showQuestLevel
 

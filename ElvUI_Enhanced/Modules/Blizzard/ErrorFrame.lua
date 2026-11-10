@@ -7,7 +7,7 @@ local defaultSettings = {
 	height = 60,
 	font = "PT Sans Narrow",
 	fontSize = 15,
-	fontOutline = "NONE"
+	fontOutline = "NONE",
 }
 
 function mod:ErrorFrameSize(db)
@@ -17,7 +17,17 @@ function mod:ErrorFrameSize(db)
 	UIErrorsFrame:SetFont(LSM:Fetch("font", db.font), db.fontSize, db.fontOutline)
 
 	if not UIErrorsFrame.mover then
-		E:CreateMover(UIErrorsFrame, "UIErrorsFrameMover", L["Error Frame"], nil, nil, nil, "ALL,GENERAL", nil, "elvuiPlugins,enhanced,miscGroup,errorFrame")
+		E:CreateMover(
+			UIErrorsFrame,
+			"UIErrorsFrameMover",
+			L["Error Frame"],
+			nil,
+			nil,
+			nil,
+			"ALL,GENERAL",
+			nil,
+			"elvuiPlugins,enhanced,miscGroup,errorFrame"
+		)
 	end
 end
 

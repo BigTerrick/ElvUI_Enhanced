@@ -18,7 +18,9 @@ local ERR_INV_FULL = ERR_INV_FULL
 local MAIL_MIN_DELAY = 0.15
 
 function TAM:GetTotalCash()
-	if GetInboxNumItems() == 0 then return 0 end
+	if GetInboxNumItems() == 0 then
+		return 0
+	end
 
 	local totalCash = 0
 
@@ -30,7 +32,9 @@ function TAM:GetTotalCash()
 end
 
 function TAM:UpdateButtons()
-	if self.processing then return end
+	if self.processing then
+		return
+	end
 
 	if GetInboxNumItems() == 0 then
 		self.takeAll:Disable()
@@ -58,7 +62,9 @@ function TAM:Reset()
 end
 
 function TAM:StartOpening(mode)
-	if GetInboxNumItems() == 0 then return end
+	if GetInboxNumItems() == 0 then
+		return
+	end
 
 	self:Reset()
 
@@ -77,7 +83,9 @@ function TAM:StartOpening(mode)
 	self.processing = true
 
 	self.numToOpen = GetInboxNumItems()
-	self.takeAll:SetScript("OnUpdate", function(_, elapsed) self:OnUpdate(elapsed) end)
+	self.takeAll:SetScript("OnUpdate", function(_, elapsed)
+		self:OnUpdate(elapsed)
+	end)
 
 	if mode == 2 then
 		self:RemoveNextMail()
@@ -90,7 +98,7 @@ end
 
 function TAM:StopOpening(err)
 	if self.collectedCash > 0 then
-		E:Print(L["Collected "]..E:FormatMoney(self.collectedCash))
+		E:Print(L["Collected "] .. E:FormatMoney(self.collectedCash))
 	end
 	if self.collectedTotal > 0 and not err then
 		E:Print(L["Collection completed."])
@@ -186,7 +194,9 @@ function TAM:RemoveNextMail()
 end
 
 function TAM:OnUpdate(dt)
-	if not self.timeUntilNextRetrieval then return end
+	if not self.timeUntilNextRetrieval then
+		return
+	end
 
 	self.timeUntilNextRetrieval = self.timeUntilNextRetrieval - dt
 
@@ -212,7 +222,7 @@ function TAM:OnEvent(event, errstr)
 		self:RegisterEvent("UPDATE_PENDING_MAIL", "OnEvent")
 		self:UnregisterEvent("MAIL_SHOW")
 
-		self:UpdateButtons(true)
+		self:UpdateButtons()
 	elseif event == "MAIL_CLOSED" then
 		self:RegisterEvent("MAIL_SHOW", "OnEvent")
 		self:UnregisterEvent("MAIL_CLOSED")
@@ -241,7 +251,9 @@ function TAM:OnEvent(event, errstr)
 end
 
 function TAM:Initialize()
-	if not E.db.enhanced.blizzard.takeAllMail then return end
+	if not E.db.enhanced.blizzard.takeAllMail then
+		return
+	end
 
 	local S = E:GetModule("Skins")
 
@@ -249,18 +261,20 @@ function TAM:Initialize()
 
 	self.takeAll = CreateFrame("Button", "ElvUI_MailButtonAll", InboxFrame, "UIPanelButtonTemplate")
 	self.takeAll:Size(80, 22)
-	self.takeAll:Point("BOTTOM", "MailFrame","BOTTOM", -53, 92)
+	self.takeAll:Point("BOTTOM", "MailFrame", "BOTTOM", -53, 92)
 	self.takeAll:SetText(L["Take All"])
 	S:HandleButton(self.takeAll)
 
 	self.takeCash = CreateFrame("Button", "ElvUI_MailButtonCash", InboxFrame, "UIPanelButtonTemplate")
 	self.takeCash:Size(80, 22)
-	self.takeCash:Point("BOTTOM", "MailFrame","BOTTOM", 34, 92)
+	self.takeCash:Point("BOTTOM", "MailFrame", "BOTTOM", 34, 92)
 	self.takeCash:SetText(L["Take Cash"])
 	S:HandleButton(self.takeCash)
 
-	self.takeAll:SetScript("OnHide", function() self:StopOpening(true) end)
---	self.takeCash:SetScript("OnHide", function() self:StopOpening(true) end)
+	self.takeAll:SetScript("OnHide", function()
+		self:StopOpening(true)
+	end)
+	--	self.takeCash:SetScript("OnHide", function() self:StopOpening(true) end)
 
 	self.takeAll:SetScript("OnClick", function()
 		if IsShiftKeyDown() then
@@ -269,7 +283,9 @@ function TAM:Initialize()
 			self:StartOpening()
 		end
 	end)
-	self.takeCash:SetScript("OnClick", function() self:StartOpening(1) end)
+	self.takeCash:SetScript("OnClick", function()
+		self:StartOpening(1)
+	end)
 
 	self.takeAll:SetScript("OnEnter", function()
 		GameTooltip:SetOwner(self.takeAll, "ANCHOR_TOP")
@@ -282,8 +298,12 @@ function TAM:Initialize()
 		GameTooltip:Show()
 	end)
 
-	self.takeAll:SetScript("OnLeave", function() GameTooltip:Hide() end)
-	self.takeCash:SetScript("OnLeave", function() GameTooltip:Hide() end)
+	self.takeAll:SetScript("OnLeave", function()
+		GameTooltip:Hide()
+	end)
+	self.takeCash:SetScript("OnLeave", function()
+		GameTooltip:Hide()
+	end)
 
 	self:RegisterEvent("MAIL_SHOW", "OnEvent")
 

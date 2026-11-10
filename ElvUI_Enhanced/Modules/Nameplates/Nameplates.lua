@@ -40,7 +40,9 @@ end
 function ENP:UPDATE_MOUSEOVER_UNIT()
 	if UnitIsPlayer("mouseover") and UnitReaction("mouseover", "player") ~= 2 then
 		local name, realm = UnitName("mouseover")
-		if realm or not name or name == UNKNOWN then return end
+		if realm or not name or name == UNKNOWN then
+			return
+		end
 
 		if E.db.enhanced.nameplates.classCache then
 			local _, class = UnitClass("mouseover")
@@ -76,15 +78,25 @@ function ENP:UPDATE_MOUSEOVER_UNIT()
 		self.scanner:SetUnit("mouseover")
 
 		local name = _G["Enhanced_ScanningTooltipTextLeft1"]:GetText()
-		if not name then return end
+		if not name then
+			return
+		end
 		local description = _G["Enhanced_ScanningTooltipTextLeft2"]:GetText()
-		if not description then return end
+		if not description then
+			return
+		end
 
-		if match(description, UNIT_LEVEL_TEMPLATE) then return end
+		if match(description, UNIT_LEVEL_TEMPLATE) then
+			return
+		end
 
-		name = gsub(gsub((name), "|c........", "" ), "|r", "")
-		if name ~= UnitName("mouseover") then return end
-		if UnitPlayerControlled("mouseover") then return end
+		name = gsub(gsub(name, "|c........", ""), "|r", "")
+		if name ~= UnitName("mouseover") then
+			return
+		end
+		if UnitPlayerControlled("mouseover") then
+			return
+		end
 
 		if not npcTitleMap[description] then
 			tinsert(EnhancedDB.NPCList, description)
@@ -120,7 +132,7 @@ local function UnitClassHook(self, frame, unitType)
 		end
 	elseif unitType == "ENEMY_PLAYER" then
 		local _, g = frame.oldHealthBar:GetStatusBarColor()
-		return grenColorToClass[floor(g*100 + 0.5) / 100]
+		return grenColorToClass[floor(g * 100 + 0.5) / 100]
 	end
 end
 
@@ -142,11 +154,13 @@ local separatorMap = {
 	["<"] = "<%s>",
 	["("] = "(%s)",
 	["["] = "[%s]",
-	["{"] = "{%s}"
+	["{"] = "{%s}",
 }
 
 local function Update_NameHook(self, frame)
-	if not E.db.enhanced.nameplates.titleCache then return end
+	if not E.db.enhanced.nameplates.titleCache then
+		return
+	end
 
 	if frame.Health:IsShown() then
 		if frame.Title then
@@ -204,7 +218,10 @@ local function Update_NameHook(self, frame)
 		elseif frame.Title then
 			frame.Title:Hide()
 		end
-	elseif (frame.UnitType == "FRIENDLY_NPC" or frame.UnitType == "ENEMY_NPC") and EnhancedDB.NPCList[EnhancedDB.UnitTitle[frame.UnitName]] then
+	elseif
+		(frame.UnitType == "FRIENDLY_NPC" or frame.UnitType == "ENEMY_NPC")
+		and EnhancedDB.NPCList[EnhancedDB.UnitTitle[frame.UnitName]]
+	then
 		if not frame.Title then
 			frame.Title = frame:CreateFontString(nil, "OVERLAY")
 			frame.Title:SetWordWrap(false)
@@ -219,7 +236,7 @@ local function Update_NameHook(self, frame)
 				r, g, b = db.reactions.good.r, db.reactions.good.g, db.reactions.good.b
 			elseif frame.UnitReaction == 1 or frame.UnitReaction == 2 then -- hostile
 				r, g, b = db.reactions.bad.r, db.reactions.bad.g, db.reactions.bad.b
-			elseif frame.UnitReaction == 4  then -- neutral
+			elseif frame.UnitReaction == 4 then -- neutral
 				r, g, b = db.reactions.neutral.r, db.reactions.neutral.g, db.reactions.neutral.b
 			else
 				r, g, b = 1, 1, 1
@@ -230,7 +247,10 @@ local function Update_NameHook(self, frame)
 		end
 
 		frame.Title:SetPoint("TOP", frame.Name, "BOTTOM")
-		frame.Title:SetFormattedText(separatorMap[db.separator], EnhancedDB.NPCList[EnhancedDB.UnitTitle[frame.UnitName]])
+		frame.Title:SetFormattedText(
+			separatorMap[db.separator],
+			EnhancedDB.NPCList[EnhancedDB.UnitTitle[frame.UnitName]]
+		)
 		frame.Title:Show()
 	elseif frame.Title then
 		frame.Title:SetText("")
@@ -264,7 +284,7 @@ local events = {
 	"CHAT_MSG_SAY",
 	"CHAT_MSG_YELL",
 	"CHAT_MSG_MONSTER_SAY",
-	"CHAT_MSG_MONSTER_YELL"
+	"CHAT_MSG_MONSTER_YELL",
 }
 
 local bubbleList = {}
@@ -279,7 +299,7 @@ delayFrame:SetScript("OnUpdate", function(self, elapsed)
 
 		if frame.delay <= 0 then
 			frame.delay = 0
-			E:UIFrameFadeOut(frame, .2, frame:GetAlpha(), 0)
+			E:UIFrameFadeOut(frame, 0.2, frame:GetAlpha(), 0)
 			tremove(bubbleList, i)
 		else
 			i = i + 1
@@ -342,7 +362,7 @@ local function CreateBubble()
 	frame.FadeObject = {
 		finishedFuncKeep = true,
 		finishedArg1 = frame,
-		finishedFunc = FadeClosure
+		finishedFunc = FadeClosure,
 	}
 
 	return frame
@@ -385,15 +405,26 @@ function ENP:AddBubbleMessage(frame, msg, author, guid)
 		local classColorTable, lowerCaseWord, isFirstWord, tempWord, wordMatch, classMatch
 		if msg and match(msg, "%s-%S+%s*") then
 			for word in gmatch(msg, "%s-%S+%s*") do
-				tempWord = gsub(word, "^[%s%p]-([^%s%p]+)([%-]?[^%s%p]-)[%s%p]*$","%1%2")
+				tempWord = gsub(word, "^[%s%p]-([^%s%p]+)([%-]?[^%s%p]-)[%s%p]*$", "%1%2")
 				lowerCaseWord = lower(tempWord)
 
 				classMatch = CH.ClassNames[lowerCaseWord]
 				wordMatch = classMatch and lowerCaseWord
 
 				if wordMatch and not E.global.chat.classColorMentionExcludedNames[wordMatch] then
-					classColorTable = CUSTOM_CLASS_COLORS and CUSTOM_CLASS_COLORS[classMatch] or RAID_CLASS_COLORS[classMatch]
-					word = gsub(word, gsub(tempWord, "%-","%%-"), format("\124cff%.2x%.2x%.2x%s\124r", classColorTable.r*255, classColorTable.g*255, classColorTable.b*255, tempWord))
+					classColorTable = CUSTOM_CLASS_COLORS and CUSTOM_CLASS_COLORS[classMatch]
+						or RAID_CLASS_COLORS[classMatch]
+					word = gsub(
+						word,
+						gsub(tempWord, "%-", "%%-"),
+						format(
+							"\124cff%.2x%.2x%.2x%s\124r",
+							classColorTable.r * 255,
+							classColorTable.g * 255,
+							classColorTable.b * 255,
+							tempWord
+						)
+					)
 				end
 
 				if not isFirstWord then
@@ -416,16 +447,22 @@ function ENP:AddBubbleMessage(frame, msg, author, guid)
 end
 
 function ENP:FindNameplateByChatMsg(event, msg, author, _, _, _, _, _, channelID, _, _, _, guid)
-	if author == UnitName("player") or not author then return end
-	if not next(NP.VisiblePlates) then return end
+	if author == UnitName("player") or not author then
+		return
+	end
+	if not next(NP.VisiblePlates) then
+		return
+	end
 
 	local chatType = sub(event, 10)
 	if sub(chatType, 1, 7) == "CHANNEL" then
-		chatType = "CHANNEL"..channelID
+		chatType = "CHANNEL" .. channelID
 	end
 
 	local info = ChatTypeInfo[chatType]
-	if not info then return end
+	if not info then
+		return
+	end
 
 	for frame in pairs(NP.VisiblePlates) do
 		if frame.UnitName == author then
@@ -436,7 +473,7 @@ function ENP:FindNameplateByChatMsg(event, msg, author, _, _, _, _, _, channelID
 				bubbleFrame.text:ClearAllPoints()
 				bubbleFrame.text:SetPoint("BOTTOM", frame, "TOP", 0, 20)
 				bubbleFrame:Show()
-				E:UIFrameFadeIn(bubbleFrame, .2, 0, 1)
+				E:UIFrameFadeIn(bubbleFrame, 0.2, 0, 1)
 			else
 				bubbleFrame = frame.bubbleFrame
 			end
@@ -463,7 +500,7 @@ function ENP:FindNameplateByChatMsg(event, msg, author, _, _, _, _, _, channelID
 
 			if bubbleFrame.delay == 0 then
 				E:UIFrameFadeRemoveFrame(bubbleFrame)
-				E:UIFrameFadeIn(bubbleFrame, .2, bubbleFrame:GetAlpha(), 1)
+				E:UIFrameFadeIn(bubbleFrame, 0.2, bubbleFrame:GetAlpha(), 1)
 			end
 
 			local _, delayMult = gsub(msg, "%s+", "")
@@ -528,7 +565,6 @@ function ENP:UpdateAllSettings()
 		end
 
 		self:RegisterEvent("UPDATE_MOUSEOVER_UNIT")
-
 	elseif not E.db.enhanced.nameplates.titleCache and not E.db.enhanced.nameplates.classCache then
 		self:UnregisterEvent("UPDATE_MOUSEOVER_UNIT")
 	end

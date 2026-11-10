@@ -27,16 +27,18 @@ local BUYBACK_ITEMS_PER_PAGE = BUYBACK_ITEMS_PER_PAGE
 local ITEM_SPELL_KNOWN = ITEM_SPELL_KNOWN
 local MERCHANT_ITEMS_PER_PAGE = MERCHANT_ITEMS_PER_PAGE
 
-local knownColor = {r = 0.1, g = 1.0, b = 0.2}
+local knownColor = { r = 0.1, g = 1.0, b = 0.2 }
 
 local function MerchantFrame_UpdateMerchantInfo()
 	local numItems = GetMerchantNumItems()
 
 	for i = 1, BUYBACK_ITEMS_PER_PAGE do
 		local index = (MerchantFrame.page - 1) * MERCHANT_ITEMS_PER_PAGE + i
-		if index > numItems then return end
+		if index > numItems then
+			return
+		end
 
-		local button = _G["MerchantItem"..i.."ItemButton"]
+		local button = _G["MerchantItem" .. i .. "ItemButton"]
 
 		if button and button:IsShown() then
 			local _, _, _, _, numAvailable, isUsable = GetMerchantItemInfo(index)
@@ -58,9 +60,11 @@ local function MerchantFrame_UpdateBuybackInfo()
 	local numItems = GetNumBuybackItems()
 
 	for i = 1, BUYBACK_ITEMS_PER_PAGE do
-		if i > numItems then return end
+		if i > numItems then
+			return
+		end
 
-		local button = _G["MerchantItem"..i.."ItemButton"]
+		local button = _G["MerchantItem" .. i .. "ItemButton"]
 
 		if button and button:IsShown() then
 			local _, _, _, _, _, isUsable = GetBuybackItemInfo(i)
@@ -78,9 +82,11 @@ local function AuctionFrameBrowse_Update()
 
 	for i = 1, NUM_BROWSE_TO_DISPLAY do
 		local index = offset + i
-		if index > numItems then return end
+		if index > numItems then
+			return
+		end
 
-		local texture = _G["BrowseButton"..i.."ItemIconTexture"]
+		local texture = _G["BrowseButton" .. i .. "ItemIconTexture"]
 
 		if texture and texture:IsShown() then
 			local _, _, _, _, canUse = GetAuctionItemInfo("list", index)
@@ -98,9 +104,11 @@ local function AuctionFrameBid_Update()
 
 	for i = 1, NUM_BIDS_TO_DISPLAY do
 		local index = offset + i
-		if index > numItems then return end
+		if index > numItems then
+			return
+		end
 
-		local texture = _G["BidButton"..i.."ItemIconTexture"]
+		local texture = _G["BidButton" .. i .. "ItemIconTexture"]
 
 		if texture and texture:IsShown() then
 			local _, _, _, _, canUse = GetAuctionItemInfo("bidder", index)
@@ -118,9 +126,11 @@ local function AuctionFrameAuctions_Update()
 
 	for i = 1, NUM_AUCTIONS_TO_DISPLAY do
 		local index = offset + i
-		if index > numItems then return end
+		if index > numItems then
+			return
+		end
 
-		local texture = _G["AuctionsButton"..i.."ItemIconTexture"]
+		local texture = _G["AuctionsButton" .. i .. "ItemIconTexture"]
 
 		if texture and texture:IsShown() then
 			local _, _, _, _, canUse, _, _, _, _, _, _, _, saleStatus = GetAuctionItemInfo("owner", index)
@@ -138,12 +148,17 @@ local function AuctionFrameAuctions_Update()
 end
 
 local function GuildBankFrame_Update()
-	if GuildBankFrame.mode ~= "bank" then return end
+	if GuildBankFrame.mode ~= "bank" then
+		return
+	end
 
 	local tab = GetCurrentGuildBankTab()
 
 	for i = 1, MAX_GUILDBANK_SLOTS_PER_TAB do
-		local button = _G["GuildBankColumn"..ceil((i - 0.5) / NUM_SLOTS_PER_GUILDBANK_GROUP).."Button"..fmod(i, NUM_SLOTS_PER_GUILDBANK_GROUP)]
+		local button = _G["GuildBankColumn" .. ceil((i - 0.5) / NUM_SLOTS_PER_GUILDBANK_GROUP) .. "Button" .. fmod(
+			i,
+			NUM_SLOTS_PER_GUILDBANK_GROUP
+		)]
 
 		if button and button:IsShown() then
 			local texture, _, locked = GetGuildBankItemInfo(tab, i)
@@ -160,19 +175,25 @@ local function GuildBankFrame_Update()
 end
 
 function AK:IsAlreadyKnown(itemLink)
-	if not itemLink then return end
+	if not itemLink then
+		return
+	end
 
 	local itemID = match(itemLink, "item:(%d+):")
-	if self.knownTable[itemID] then return true end
+	if self.knownTable[itemID] then
+		return true
+	end
 
 	local _, _, _, _, _, itemType = GetItemInfo(itemLink)
-	if not self.knowableTypes[itemType] then return end
+	if not self.knowableTypes[itemType] then
+		return
+	end
 
 	self.scantip:ClearLines()
 	self.scantip:SetHyperlink(itemLink)
 
 	for i = 2, self.scantip:NumLines() do
-		local text = _G["ElvUI_MerchantAlreadyKnownTextLeft"..i]:GetText()
+		local text = _G["ElvUI_MerchantAlreadyKnownTextLeft" .. i]:GetText()
 
 		if text == ITEM_SPELL_KNOWN then
 			self.knownTable[itemID] = true
@@ -229,7 +250,9 @@ function AK:IsLoadeble()
 end
 
 function AK:ToggleState()
-	if not self:IsLoadeble() then return end
+	if not self:IsLoadeble() then
+		return
+	end
 
 	if not self.initialized then
 		self.scantip = CreateFrame("GameTooltip", "ElvUI_MerchantAlreadyKnown", nil, "GameTooltipTemplate")
@@ -242,7 +265,7 @@ function AK:ToggleState()
 			[consumable] = true,
 			[glyph] = true,
 			[recipe] = true,
-			[miscallaneous] = true
+			[miscallaneous] = true,
 		}
 
 		self.initialized = true
@@ -263,7 +286,9 @@ function AK:ToggleState()
 end
 
 function AK:Initialize()
-	if not E.db.enhanced.general.alreadyKnown then return end
+	if not E.db.enhanced.general.alreadyKnown then
+		return
+	end
 
 	self:ToggleState()
 end

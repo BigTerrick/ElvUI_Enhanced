@@ -79,15 +79,21 @@ local addonFixes = {
 		end
 
 		function clcret:PLAYER_REGEN_ENABLED()
-			if not self.addonEnabled then return end
+			if not self.addonEnabled then
+				return
+			end
 			self.frame:Hide()
 		end
 		function clcret:PLAYER_REGEN_DISABLED()
-			if not self.addonEnabled then return end
+			if not self.addonEnabled then
+				return
+			end
 			self.frame:Hide()
 		end
 		function clcret:PLAYER_TARGET_CHANGED()
-			if not self.addonEnabled then return end
+			if not self.addonEnabled then
+				return
+			end
 
 			if db.show == "boss" then
 				if UnitClassification("target") ~= "worldboss" then
@@ -119,7 +125,9 @@ local addonFixes = {
 	-- DrDamage 1.7.8
 	-- https://www.wowace.com/projects/dr-damage/files/426084
 	["DrDamage"] = function()
-		if not E.private.actionbar.enable then return end
+		if not E.private.actionbar.enable then
+			return
+		end
 
 		local HasAction = HasAction
 		local SecureButton_GetEffectiveButton = SecureButton_GetEffectiveButton
@@ -128,17 +136,27 @@ local addonFixes = {
 		local AB = E:GetModule("ActionBars")
 
 		local DrD_ProcessButton = function(button, func, spell, uid, mana, disable)
-			if not button then return end
+			if not button then
+				return
+			end
 			if not spell and not uid and not mana then
 				local frame = button.drd
-				if frame then frame:SetText(nil) end
+				if frame then
+					frame:SetText(nil)
+				end
 				frame = button.drd2
-				if frame then frame:SetText(nil) end
+				if frame then
+					frame:SetText(nil)
+				end
 			end
-			if not DrDamage.db.profile.ABText or disable then return end
+			if not DrDamage.db.profile.ABText or disable then
+				return
+			end
 			if button:IsVisible() then
 				local id, name, rank = func(button)
-				if id and (not HasAction(id) or uid and uid ~= id) then return end
+				if id and (not HasAction(id) or uid and uid ~= id) then
+					return
+				end
 				DrDamage:CheckAction(button, spell, id, name, rank, mana)
 			end
 		end
@@ -231,9 +249,21 @@ local addonFixes = {
 
 function AC:AddAddon(addon, func)
 	if type(addon) ~= "string" then
-		error(string.format("bad argument #1 to 'AddAddon' (string expected, got %s)", addon ~= nil and type(addon) or "no value"), 2)
+		error(
+			string.format(
+				"bad argument #1 to 'AddAddon' (string expected, got %s)",
+				addon ~= nil and type(addon) or "no value"
+			),
+			2
+		)
 	elseif func and type(func) ~= "function" then
-		error(string.format("bad argument #2 to 'AddAddon' (function expected, got %s)", func ~= nil and type(func) or "no value"), 2)
+		error(
+			string.format(
+				"bad argument #2 to 'AddAddon' (function expected, got %s)",
+				func ~= nil and type(func) or "no value"
+			),
+			2
+		)
 	end
 
 	if not self.initialized then
@@ -242,7 +272,9 @@ function AC:AddAddon(addon, func)
 		return
 	end
 
-	if not self.addonList[addon] then return end
+	if not self.addonList[addon] then
+		return
+	end
 
 	if IsAddOnLoaded(addon) then
 		self:ApplyFix(addon, func)
@@ -281,7 +313,9 @@ function AC:ApplyFix(addon, func)
 end
 
 function AC:ADDON_LOADED(_, addonName)
-	if not (addonFixes[addonName] or externalFixes[addonName]) then return end
+	if not (addonFixes[addonName] or externalFixes[addonName]) then
+		return
+	end
 
 	for i, addon in ipairs(self.addonQueue) do
 		if addon == addonName then

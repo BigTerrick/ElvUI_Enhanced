@@ -4,7 +4,7 @@ V.enhanced = {
 	animatedAchievementBars = false,
 	deathRecap = false,
 	actionbar = {
-		keyPressAnimation = false
+		keyPressAnimation = false,
 	},
 	character = {
 		enable = false,
@@ -19,8 +19,8 @@ V.enhanced = {
 				RANGED_COMBAT = false,
 				SPELL_COMBAT = false,
 				DEFENSES = false,
-				RESISTANCE = false
-			}
+				RESISTANCE = false,
+			},
 		},
 		pet = {
 			orderName = "",
@@ -31,21 +31,21 @@ V.enhanced = {
 				RANGED_COMBAT = false,
 				SPELL_COMBAT = false,
 				DEFENSES = false,
-				RESISTANCE = false
-			}
-		}
+				RESISTANCE = false,
+			},
+		},
 	},
 	timerTracker = {
-		enable = false
+		enable = false,
 	},
 	loseControl = {
-		enable = false
+		enable = false,
 	},
 	interruptTracker = {
 		enable = false,
 		everywhere = false,
 		arena = true,
-		battleground = false
+		battleground = false,
 	},
-	minimapButtonGrabber = false
+	minimapButtonGrabber = false,
 }

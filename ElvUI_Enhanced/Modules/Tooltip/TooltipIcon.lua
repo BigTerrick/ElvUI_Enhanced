@@ -13,21 +13,23 @@ local itemTooltips = {
 	GameTooltip,
 	ItemRefTooltip,
 	ShoppingTooltip1,
-	ShoppingTooltip2
+	ShoppingTooltip2,
 }
 
 local spellTooltips = {
 	GameTooltip,
-	ItemRefTooltip
+	ItemRefTooltip,
 }
 
 local function AddIcon(self, icon)
-	if not icon then return end
+	if not icon then
+		return
+	end
 
-	local title = _G[self:GetName().."TextLeft1"]
+	local title = _G[self:GetName() .. "TextLeft1"]
 	local text = title and title:GetText()
 
-	if text and not find(text, "|T"..icon) then
+	if text and not find(text, "|T" .. icon) then
 		title:SetFormattedText("|T%s:30:30:0:0:64:64:5:59:5:59|t %s", icon, text)
 	end
 end
@@ -46,7 +48,9 @@ local function SpellIcon(self)
 end
 
 local function AchievementIcon(self, link)
-	if type(link) ~= "string" then return end
+	if type(link) ~= "string" then
+		return
+	end
 
 	local linkType, id = match(link, "^([^:]+):(%d+)")
 	if id and (linkType == "achievement") then
@@ -95,7 +99,9 @@ function TI:ToggleAchievementsState()
 end
 
 function TI:Initialize()
-	if not E.db.enhanced.tooltip.tooltipIcon.enable then return end
+	if not E.db.enhanced.tooltip.tooltipIcon.enable then
+		return
+	end
 
 	self:ToggleItemsState()
 	self:ToggleSpellsState()

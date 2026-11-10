@@ -1,4 +1,4 @@
-local E = unpack(ElvUI); --Import: Engine, Locales, PrivateDB, ProfileDB, GlobalDB
+local E = unpack(ElvUI) --Import: Engine, Locales, PrivateDB, ProfileDB, GlobalDB
 local L = E.Libs.ACL:NewLocale("ElvUI", "deDE")
 
 -- DESC locales
@@ -61,9 +61,12 @@ L["Pet Background"] = true
 
 -- Equipment
 L["Damaged Only"] = "Nur Beschädigte"
-L["Enable/Disable the display of durability information on the character screen."] = "Anzeige der Haltbarkeit im Charakterfenster."
-L["Enable/Disable the display of item levels on the character screen."] = "Anzeige von Gegenstandsstufen im Charakterfenster aktivieren / deaktivieren."
-L["Only show durabitlity information for items that are damaged."] = "Nur die Haltbarkeit für beschädigte Ausrüstungsteile anzeigen."
+L["Enable/Disable the display of durability information on the character screen."] =
+	"Anzeige der Haltbarkeit im Charakterfenster."
+L["Enable/Disable the display of item levels on the character screen."] =
+	"Anzeige von Gegenstandsstufen im Charakterfenster aktivieren / deaktivieren."
+L["Only show durabitlity information for items that are damaged."] =
+	"Nur die Haltbarkeit für beschädigte Ausrüstungsteile anzeigen."
 L["Quality Color"] = "Qualitätsfarbe"
 
 -- General
@@ -72,12 +75,18 @@ L["Add button to Trainer frame with ability to train all available skills in one
 L["Alt-Click Merchant"] = true
 L["Already Known"] = true
 L["Animated Achievement Bars"] = true
-L["Automatically change your watched faction on the reputation bar to the faction you got reputation points for."] = "Ändere automatisch die beobachtete Fraktion auf der Erfahrungsleiste zu der Fraktion für die Sie grade Rufpunkte erhalten haben."
-L["Automatically release body when killed inside a battleground."] = "Gibt automatisch Ihren Geist frei, wenn Sie auf dem Schlachtfeld getötet wurden."
-L["Automatically select the quest reward with the highest vendor sell value."] = "Wählt automatisch die Questbelohnung mit dem höchsten Wiederverkaufswert beim Händler"
+L["Automatically change your watched faction on the reputation bar to the faction you got reputation points for."] =
+	"Ändere automatisch die beobachtete Fraktion auf der Erfahrungsleiste zu der Fraktion für die Sie grade Rufpunkte erhalten haben."
+L["Automatically release body when killed inside a battleground."] =
+	"Gibt automatisch Ihren Geist frei, wenn Sie auf dem Schlachtfeld getötet wurden."
+L["Automatically select the quest reward with the highest vendor sell value."] =
+	"Wählt automatisch die Questbelohnung mit dem höchsten Wiederverkaufswert beim Händler"
 L["Change color of item icons which already known."] = true
 L["Changes the transparency of all the movers."] = "Ändere die Transparenz aller Ankerpukte"
+L["Color quests by difficulty and progress in the Quest Tracker."] = true
+L["Colorize Quests"] = true
 L["Display quest levels at Quest Log."] = "Questlevel im Questlog anzeigen."
+L["Display quest levels at Quest Tracker."] = true
 L["Hide Zone Text"] = "Zonentext verstecken"
 L["Holding Alt key while buying something from vendor will now buy an entire stack."] = true
 L["Mover Transparency"] = "Transparenz Ankerpunkte"
@@ -112,7 +121,8 @@ L["Toggle Location Digits."] = "Koordinaten ein- oder ausblenden."
 L["Location Digits"] = "Koordinaten Nachkommastellen"
 L["Location Panel"] = "Standort-Panel"
 L["Number of digits for map location."] = "Anzahl der Nachkommastellen der Koordinaten."
-L["The time to wait before fading the minimap back in after combat hide. (0 = Disabled)"] = "Die Zeit vor dem wieder Einblenden der Minimap nach dem Kampf. (0 = deaktiviert)"
+L["The time to wait before fading the minimap back in after combat hide. (0 = Disabled)"] =
+	"Die Zeit vor dem wieder Einblenden der Minimap nach dem Kampf. (0 = deaktiviert)"
 L["Toggle Location Panel."] = "Umschalten des Standort-Panels"
 
 -- Timer Tracker
@@ -121,8 +131,10 @@ L["Hook DBM"] = true
 
 -- Tooltip
 L["Check Player"] = true
-L["Colorize the tooltip border based on item quality."] = "Färbe den Tooltip-Rahmen basierend auf der Gegenstandsqualität"
-L["Check achievement completion instead of boss kill stats.\nSome servers log incorrect boss kill statistics, this is an alternative way to get player progress."] = true
+L["Colorize the tooltip border based on item quality."] =
+	"Färbe den Tooltip-Rahmen basierend auf der Gegenstandsqualität"
+L["Check achievement completion instead of boss kill stats.\nSome servers log incorrect boss kill statistics, this is an alternative way to get player progress."] =
+	true
 L["Icecrown Citadel"] = true
 L["Item Border Color"] = "Gegenstandsrahmen-Farbe"
 L["Progress Info"] = true
@@ -130,7 +142,8 @@ L["Ruby Sanctum"] = true
 L["Show/Hides an Icon for Achievements on the Tooltip."] = "Icon für Erfolge am Tooltip anzeigen oder ausblenden."
 L["Show/Hides an Icon for Items on the Tooltip."] = "Icon für Gegenstände am Tooltip anzeigen oder ausblenden."
 L["Show/Hides an Icon for Spells on the Tooltip."] = "Icon für Zauber am Tooltip anzeigen oder ausblenden."
-L["Show/Hides an Icon for Spells and Items on the Tooltip."] = "Icon für Zauber oder Gegenstände am Tooltip anzeigen oder ausblenden."
+L["Show/Hides an Icon for Spells and Items on the Tooltip."] =
+	"Icon für Zauber oder Gegenstände am Tooltip anzeigen oder ausblenden."
 L["Tiers"] = true
 L["Tooltip Icon"] = true
 L["Trial of the Crusader"] = true

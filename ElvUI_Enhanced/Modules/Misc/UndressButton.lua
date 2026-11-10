@@ -20,7 +20,8 @@ function UB:CreateUndressButton(auction)
 			self.dressUpButton:Point("RIGHT", DressUpFrameResetButton, "LEFT", -3, 0)
 		end
 	else
-		self.auctionDressUpButton = CreateFrame("Button", "AuctionDressUpFrame_UndressButton", AuctionDressUpFrame, "UIPanelButtonTemplate")
+		self.auctionDressUpButton =
+			CreateFrame("Button", "AuctionDressUpFrame_UndressButton", AuctionDressUpFrame, "UIPanelButtonTemplate")
 		self.auctionDressUpButton:Size(80, 22)
 		self.auctionDressUpButton:SetFrameStrata("HIGH")
 		self.auctionDressUpButton:SetText(L["Undress"])
@@ -42,7 +43,9 @@ function UB:CreateUndressButton(auction)
 end
 
 function UB:ADDON_LOADED(_, addon)
-	if addon ~= "Blizzard_AuctionUI" then return end
+	if addon ~= "Blizzard_AuctionUI" then
+		return
+	end
 
 	self:CreateUndressButton(true)
 
@@ -75,7 +78,9 @@ function UB:ToggleState()
 end
 
 function UB:Initialize()
-	if not E.db.enhanced.general.undressButton then return end
+	if not E.db.enhanced.general.undressButton then
+		return
+	end
 
 	self:ToggleState()
 end

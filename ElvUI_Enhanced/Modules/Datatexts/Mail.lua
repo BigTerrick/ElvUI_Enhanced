@@ -15,7 +15,7 @@ local Read
 
 local function MakeIconString()
 	local str = ""
-	str = str..Mail_Icon
+	str = str .. Mail_Icon
 
 	return str
 end
@@ -42,7 +42,7 @@ local function OnEvent(self, event, ...)
 	end
 
 	if newMail then
-		self.text:SetText(MakeIconString()..L["New Mail"])
+		self.text:SetText(MakeIconString() .. L["New Mail"])
 		self.text:SetTextColor(0, 1, 0)
 		Read = false
 	else
@@ -63,11 +63,26 @@ local function OnEnter(self)
 	local sender1, sender2, sender3 = GetLatestThreeSenders()
 	if not Read then
 		DT.tooltip:AddLine(HAVE_MAIL_FROM)
-		if sender1 then DT.tooltip:AddLine("    "..sender1) end
-		if sender2 then DT.tooltip:AddLine("    "..sender2) end
-		if sender3 then DT.tooltip:AddLine("    "..sender3) end
+		if sender1 then
+			DT.tooltip:AddLine("    " .. sender1)
+		end
+		if sender2 then
+			DT.tooltip:AddLine("    " .. sender2)
+		end
+		if sender3 then
+			DT.tooltip:AddLine("    " .. sender3)
+		end
 	end
 	DT.tooltip:Show()
 end
 
-DT:RegisterDatatext("Mail", {"PLAYER_ENTERING_WORLD", "MAIL_INBOX_UPDATE", "UPDATE_PENDING_MAIL", "MAIL_CLOSED", "PLAYER_LOGIN", "MAIL_SHOW"}, OnEvent, OnUpdate, nil, OnEnter, nil, EE:ColorizeSettingName(MAIL_LABEL))
+DT:RegisterDatatext(
+	"Mail",
+	{ "PLAYER_ENTERING_WORLD", "MAIL_INBOX_UPDATE", "UPDATE_PENDING_MAIL", "MAIL_CLOSED", "PLAYER_LOGIN", "MAIL_SHOW" },
+	OnEvent,
+	OnUpdate,
+	nil,
+	OnEnter,
+	nil,
+	EE:ColorizeSettingName(MAIL_LABEL)
+)

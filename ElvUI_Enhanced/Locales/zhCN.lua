@@ -1,4 +1,4 @@
-local E = unpack(ElvUI); --Import: Engine, Locales, PrivateDB, ProfileDB, GlobalDB
+local E = unpack(ElvUI) --Import: Engine, Locales, PrivateDB, ProfileDB, GlobalDB
 local L = E.Libs.ACL:NewLocale("ElvUI", "zhCN")
 
 -- DESC locales
@@ -9,7 +9,8 @@ L["WATCHFRAME_DESC"] = "根据个人喜好调整任务追踪框架的设置。"
 L["Enhanced"] = "功能增强"
 
 -- Incompatibility
-L["GearScore '3.1.20b - Release' is not for WotLK. Download 3.1.7. Disable this version?"] = "GearScore '3.1.20b - Release'并非是为WotLK设计的，请下载版本3.1.7。要禁用此插件吗？"
+L["GearScore '3.1.20b - Release' is not for WotLK. Download 3.1.7. Disable this version?"] =
+	"GearScore '3.1.20b - Release'并非是为WotLK设计的，请下载版本3.1.7。要禁用此插件吗？"
 
 -- AddOn List
 L["Enable All"] = "全部启用"
@@ -20,7 +21,8 @@ L["Requires Reload"] = "需要重载"
 
 -- Chat
 L["Filter DPS meters Spam"] = "过滤DPS统计的垃圾讯息"
-L["Replaces reports from damage meters with a clickable hyperlink to reduce chat spam"] = "用可点击的超链接替换DPS统计的长篇报告，以减少聊天中的垃圾讯息。"
+L["Replaces reports from damage meters with a clickable hyperlink to reduce chat spam"] =
+	"用可点击的超链接替换DPS统计的长篇报告，以减少聊天中的垃圾讯息。"
 
 -- Datatext
 L["Ammo/Shard Counter"] = "弹药/碎片 计数"
@@ -66,25 +68,34 @@ L["Smooth Animations"] = "平滑动画"
 
 -- Equipment
 L["Damaged Only"] = "仅显示受损"
-L["Enable/Disable the display of durability information on the character screen."] = "开启/关闭 角色界面装备耐久度显示。"
-L["Enable/Disable the display of item levels on the character screen."] = "开启/关闭 角色界面物品等级显示。"
+L["Enable/Disable the display of durability information on the character screen."] =
+	"开启/关闭 角色界面装备耐久度显示。"
+L["Enable/Disable the display of item levels on the character screen."] =
+	"开启/关闭 角色界面物品等级显示。"
 L["Only show durabitlity information for items that are damaged."] = "只在装备受损时显示耐久度信息。"
 L["Quality Color"] = "品质颜色"
 
 -- General
 L["Add button to Dressing Room frame with ability to undress model."] = "在试衣间界面添加<裸体>按钮。"
-L["Add button to Trainer frame with ability to train all available skills in one click."] = "在训练师界面添加<学习全部>按钮，以便一键学习所有可用技能。"
+L["Add button to Trainer frame with ability to train all available skills in one click."] =
+	"在训练师界面添加<学习全部>按钮，以便一键学习所有可用技能。"
 L["Alt-Click Merchant"] = "Alt-点击快速购买"
 L["Already Known"] = "已经学会"
 L["Animated Achievement Bars"] = "动成就画条"
-L["Automatically change your watched faction on the reputation bar to the faction you got reputation points for."] = "当你获得某个阵营的声望时，自动用声望条追踪此阵营的声望。"
+L["Automatically change your watched faction on the reputation bar to the faction you got reputation points for."] =
+	"当你获得某个阵营的声望时，自动用声望条追踪此阵营的声望。"
 L["Automatically release body when killed inside a battleground."] = "在战场中死亡后自动释放灵魂。"
-L["Automatically select the quest reward with the highest vendor sell value."] = "自动选择任务奖励中售价最高的物品。"
+L["Automatically select the quest reward with the highest vendor sell value."] =
+	"自动选择任务奖励中售价最高的物品。"
 L["Change color of item icons which already known."] = "改变已经学会的物品图标颜色。"
 L["Changes the transparency of all the movers."] = "改变所有移动框架的透明度。"
+L["Color quests by difficulty and progress in the Quest Tracker."] = true
+L["Colorize Quests"] = true
 L["Display quest levels at Quest Log."] = "在任务日志中显示任务等级。"
+L["Display quest levels at Quest Tracker."] = true
 L["Hide Zone Text"] = "隐藏区域文字"
-L["Holding Alt key while buying something from vendor will now buy an entire stack."] = "按下Alt键可在商人处购买整组物品。"
+L["Holding Alt key while buying something from vendor will now buy an entire stack."] =
+	"按下Alt键可在商人处购买整组物品。"
 L["Mover Transparency"] = "移动框架透明度"
 L["PvP Autorelease"] = "PVP自动释放灵魂"
 L["Select Quest Reward"] = "选择任务奖励"
@@ -96,10 +107,12 @@ L["Undress"] = "裸体"
 
 -- HD Models Portrait Fix
 L["Debug"] = true
-L["List of models with broken portrait camera. Separete each model name with ';' simbol"] = "头像镜头破损的模型列表。每个模型名称之间使用 ';' 符号分隔。"
+L["List of models with broken portrait camera. Separete each model name with ';' simbol"] =
+	"头像镜头破损的模型列表。每个模型名称之间使用 ';' 符号分隔。"
 L["Models to fix"] = "待修复的模型"
 L["Portrait HD Fix"] = "高清头像修复"
-L["Print to chat model names of units with enabled 3D portraits."] = "将可用3D头像的单位模型名称发布到聊天框中。"
+L["Print to chat model names of units with enabled 3D portraits."] =
+	"将可用3D头像的单位模型名称发布到聊天框中。"
 
 -- Interrupt Tracker
 L["Interrupt Tracker"] = "打断追踪"
@@ -121,7 +134,8 @@ L["Toggle Location Digits."] = "开关坐标"
 L["Location Digits"] = "坐标"
 L["Location Panel"] = "位置面板"
 L["Number of digits for map location."] = "地图位置的数字坐标。"
-L["The time to wait before fading the minimap back in after combat hide. (0 = Disabled)"] = "脱离战斗后小地图淡入的等待时间。(0 = 禁用)"
+L["The time to wait before fading the minimap back in after combat hide. (0 = Disabled)"] =
+	"脱离战斗后小地图淡入的等待时间。(0 = 禁用)"
 L["Toggle Location Panel."] = "开关位置面板。"
 
 -- Timer Tracker
@@ -130,7 +144,8 @@ L["Hook DBM"] = "连接DBM"
 
 -- Tooltip
 L["Check Player"] = "检查玩家"
-L["Check achievement completion instead of boss kill stats.\nSome servers log incorrect boss kill statistics, this is an alternative way to get player progress."] = true
+L["Check achievement completion instead of boss kill stats.\nSome servers log incorrect boss kill statistics, this is an alternative way to get player progress."] =
+	true
 L["Colorize the tooltip border based on item quality."] = "以物品品质着色鼠标提示边框。"
 L["Icecrown Citadel"] = "冰冠堡垒"
 L["Item Border Color"] = "物品边框颜色"
@@ -178,7 +193,8 @@ L["Left-click on character and drag to rotate."] = "左键点击角色并拖动�
 L["Mouse Wheel Down"] = "鼠标滚轮向下"
 L["Mouse Wheel Up"] = "鼠标滚轮向上"
 L["Reset Position"] = "重置位置"
-L["Right-click on character and drag to move it within the window."] = "右键点击角色并拖动可以在窗口内移动模型。"
+L["Right-click on character and drag to move it within the window."] =
+	"右键点击角色并拖动可以在窗口内移动模型。"
 L["Rotate Left"] = "向左旋转"
 L["Rotate Right"] = "向右旋转"
 L["Zoom In"] = "放大"

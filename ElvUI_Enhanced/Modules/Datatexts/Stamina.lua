@@ -27,4 +27,13 @@ local function ValueColorUpdate(hex)
 end
 E.valueColorUpdateFuncs[ValueColorUpdate] = true
 
-DT:RegisterDatatext("Stamina", {"UNIT_STATS", "UNIT_AURA", "ACTIVE_TALENT_GROUP_CHANGED", "PLAYER_TALENT_UPDATE"}, OnEvent, nil, nil, nil, nil, EE:ColorizeSettingName(SPELL_STAT3_NAME))
+DT:RegisterDatatext(
+	"Stamina",
+	{ "UNIT_STATS", "UNIT_AURA", "ACTIVE_TALENT_GROUP_CHANGED", "PLAYER_TALENT_UPDATE" },
+	OnEvent,
+	nil,
+	nil,
+	nil,
+	nil,
+	EE:ColorizeSettingName(SPELL_STAT3_NAME)
+)

@@ -9,9 +9,9 @@ local GetWatchedFactionInfo = GetWatchedFactionInfo
 local IsFactionInactive = IsFactionInactive
 local SetWatchedFactionIndex = SetWatchedFactionIndex
 
-local increased	= gsub(gsub(FACTION_STANDING_INCREASED, "(%%s)", "(.+)"), "(%%d)", "(.+)")
-local decreased	= gsub(gsub(FACTION_STANDING_DECREASED, "(%%s)", "(.+)"), "(%%d)", "(.+)")
-local changed	= gsub(gsub(FACTION_STANDING_CHANGED, "(%%s)", "(.+)"), "(%%d)", "(.+)")
+local increased = gsub(gsub(FACTION_STANDING_INCREASED, "(%%s)", "(.+)"), "(%%d)", "(.+)")
+local decreased = gsub(gsub(FACTION_STANDING_DECREASED, "(%%s)", "(.+)"), "(%%d)", "(.+)")
+local changed = gsub(gsub(FACTION_STANDING_CHANGED, "(%%s)", "(.+)"), "(%%d)", "(.+)")
 
 function M:CHAT_MSG_COMBAT_FACTION_CHANGE(_, msg)
 	local startPos, _, faction = find(msg, increased)

@@ -1,11 +1,12 @@
-local E = unpack(ElvUI); --Import: Engine, Locales, PrivateDB, ProfileDB, GlobalDB
+local E = unpack(ElvUI) --Import: Engine, Locales, PrivateDB, ProfileDB, GlobalDB
 local L = E.Libs.ACL:NewLocale("ElvUI", "frFR")
 
 -- DESC locales
 L["ENH_LOGIN_MSG"] = "Vous utilisez |cff1784d1ElvUI|r |cff1784d1Enhanced|r |cffff8000(WotLK)|r version %s%s|r."
 L["DURABILITY_DESC"] = "Ajustez les réglages pour afficher la durabilité sur l'écran d'infos de personnage."
 L["ITEMLEVEL_DESC"] = "Réglez les paramètres pour afficher le niveau d'objet sur l'écran d'infos de personnage."
-L["WATCHFRAME_DESC"] = "Adjust the settings for the visibility of the watchframe (questlog) to your personal preference."
+L["WATCHFRAME_DESC"] =
+	"Adjust the settings for the visibility of the watchframe (questlog) to your personal preference."
 
 -- Incompatibility
 L["GearScore '3.1.20b - Release' is not for WotLK. Download 3.1.7. Disable this version?"] = true
@@ -61,9 +62,12 @@ L["Pet Background"] = true
 
 -- Equipment
 L["Damaged Only"] = "Dégâts seulement"
-L["Enable/Disable the display of durability information on the character screen."] = "Activer / Désactiver l'affichage des informations de durabilité sur l'écran d'infos de personnage."
-L["Enable/Disable the display of item levels on the character screen."] = "Activer / Désactiver l'affichage des informations du niveau d'objet sur l'écran d'infos de personnage."
-L["Only show durabitlity information for items that are damaged."] = "Afficher la durabilité seulement quand l'équipement est endommagé."
+L["Enable/Disable the display of durability information on the character screen."] =
+	"Activer / Désactiver l'affichage des informations de durabilité sur l'écran d'infos de personnage."
+L["Enable/Disable the display of item levels on the character screen."] =
+	"Activer / Désactiver l'affichage des informations du niveau d'objet sur l'écran d'infos de personnage."
+L["Only show durabitlity information for items that are damaged."] =
+	"Afficher la durabilité seulement quand l'équipement est endommagé."
 L["Quality Color"] = true
 
 -- General
@@ -72,12 +76,18 @@ L["Add button to Trainer frame with ability to train all available skills in one
 L["Alt-Click Merchant"] = true
 L["Already Known"] = true
 L["Animated Achievement Bars"] = true
-L["Automatically change your watched faction on the reputation bar to the faction you got reputation points for."] = "Change automatiquement la réputation suivie sur la barre de réputation avec la faction que vous êtes en train de faire."
-L["Automatically release body when killed inside a battleground."] = "Libère automatiquement votre corps quand vous êtes tué en Champs de Bataille."
-L["Automatically select the quest reward with the highest vendor sell value."] = "Sélectionne automatiquement la récompense de quête qui vaut la plus chère chez le vendeur."
+L["Automatically change your watched faction on the reputation bar to the faction you got reputation points for."] =
+	"Change automatiquement la réputation suivie sur la barre de réputation avec la faction que vous êtes en train de faire."
+L["Automatically release body when killed inside a battleground."] =
+	"Libère automatiquement votre corps quand vous êtes tué en Champs de Bataille."
+L["Automatically select the quest reward with the highest vendor sell value."] =
+	"Sélectionne automatiquement la récompense de quête qui vaut la plus chère chez le vendeur."
 L["Changes the transparency of all the movers."] = "Change la transparence des Ancres"
+L["Color quests by difficulty and progress in the Quest Tracker."] = true
+L["Colorize Quests"] = true
 L["Change color of item icons which already known."] = true
 L["Display quest levels at Quest Log."] = true
+L["Display quest levels at Quest Tracker."] = true
 L["Hide Zone Text"] = true
 L["Holding Alt key while buying something from vendor will now buy an entire stack."] = true
 L["Mover Transparency"] = "Transparence des Ancres"
@@ -112,7 +122,8 @@ L["Toggle Location Digits."] = true
 L["Location Digits"] = "Chiffres d'emplacement"
 L["Location Panel"] = true
 L["Number of digits for map location."] = "Nombre de chiffres pour l'emplacement."
-L["The time to wait before fading the minimap back in after combat hide. (0 = Disabled)"] = "Le temps à attendre avant que la minicarte s'estompe avec que le combat ait commencé. (0 = désactié)"
+L["The time to wait before fading the minimap back in after combat hide. (0 = Disabled)"] =
+	"Le temps à attendre avant que la minicarte s'estompe avec que le combat ait commencé. (0 = désactié)"
 L["Toggle Location Panel."] = true
 
 -- Timer Tracker
@@ -121,7 +132,8 @@ L["Hook DBM"] = true
 
 -- Tooltip
 L["Check Player"] = true
-L["Check achievement completion instead of boss kill stats.\nSome servers log incorrect boss kill statistics, this is an alternative way to get player progress."] = true
+L["Check achievement completion instead of boss kill stats.\nSome servers log incorrect boss kill statistics, this is an alternative way to get player progress."] =
+	true
 L["Colorize the tooltip border based on item quality."] = true
 L["Icecrown Citadel"] = true
 L["Item Border Color"] = true

@@ -9,5 +9,5 @@
 	<!-- <Script file="Spirit.lua"/> -->
 	<!-- <Script file="Stamina.lua"/> -->
 	<!-- <Script file="Strength.lua"/> -->
-	<!-- <Script file="Range.lua"/> -->
+	<Script file="Range.lua"/>
 </Ui>

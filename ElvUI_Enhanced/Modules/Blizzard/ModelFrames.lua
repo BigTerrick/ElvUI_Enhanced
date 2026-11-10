@@ -18,31 +18,31 @@ local modelFrames = {
 	"CompanionModelFrame",
 	"DressUpModel",
 	"PetModelFrame",
-	"PetStableModel"
+	"PetStableModel",
 }
 
 local modelSettings = {
-	["HumanMale"] = {panMaxLeft = -0.4, panMaxRight = 0.4, panMaxTop = 1.2, panMaxBottom = -0.3, panValue = 38},
-	["HumanFemale"] = {panMaxLeft = -0.3, panMaxRight = 0.3, panMaxTop = 1.2, panMaxBottom = -0.2, panValue = 45},
-	["DwarfMale"] = {panMaxLeft = -0.4, panMaxRight = 0.6, panMaxTop = 0.9, panMaxBottom = -0.2, panValue = 44},
-	["DwarfFemale"] = {panMaxLeft = -0.3, panMaxRight = 0.3, panMaxTop = 0.9, panMaxBottom = -0.2, panValue = 47},
-	["NightElfMale"] = {panMaxLeft = -0.5, panMaxRight = 0.5, panMaxTop = 1.5, panMaxBottom = -0.4, panValue = 30},
-	["NightElfFemale"] = {panMaxLeft = -0.4, panMaxRight = 0.4, panMaxTop = 1.4, panMaxBottom = -0.4, panValue = 33},
-	["GnomeMale"] = {panMaxLeft = -0.3, panMaxRight = 0.3, panMaxTop = 0.5, panMaxBottom = -0.2, panValue = 52},
-	["GnomeFemale"] = {panMaxLeft = -0.3, panMaxRight = 0.3, panMaxTop = 0.5, panMaxBottom = -0.2, panValue = 60},
-	["DraeneiMale"] = {panMaxLeft = -0.6, panMaxRight = 0.6, panMaxTop = 1.4, panMaxBottom = -0.4, panValue = 28},
-	["DraeneiFemale"] = {panMaxLeft = -0.3, panMaxRight = 0.3, panMaxTop = 1.4, panMaxBottom = -0.3, panValue = 31},
+	["HumanMale"] = { panMaxLeft = -0.4, panMaxRight = 0.4, panMaxTop = 1.2, panMaxBottom = -0.3, panValue = 38 },
+	["HumanFemale"] = { panMaxLeft = -0.3, panMaxRight = 0.3, panMaxTop = 1.2, panMaxBottom = -0.2, panValue = 45 },
+	["DwarfMale"] = { panMaxLeft = -0.4, panMaxRight = 0.6, panMaxTop = 0.9, panMaxBottom = -0.2, panValue = 44 },
+	["DwarfFemale"] = { panMaxLeft = -0.3, panMaxRight = 0.3, panMaxTop = 0.9, panMaxBottom = -0.2, panValue = 47 },
+	["NightElfMale"] = { panMaxLeft = -0.5, panMaxRight = 0.5, panMaxTop = 1.5, panMaxBottom = -0.4, panValue = 30 },
+	["NightElfFemale"] = { panMaxLeft = -0.4, panMaxRight = 0.4, panMaxTop = 1.4, panMaxBottom = -0.4, panValue = 33 },
+	["GnomeMale"] = { panMaxLeft = -0.3, panMaxRight = 0.3, panMaxTop = 0.5, panMaxBottom = -0.2, panValue = 52 },
+	["GnomeFemale"] = { panMaxLeft = -0.3, panMaxRight = 0.3, panMaxTop = 0.5, panMaxBottom = -0.2, panValue = 60 },
+	["DraeneiMale"] = { panMaxLeft = -0.6, panMaxRight = 0.6, panMaxTop = 1.4, panMaxBottom = -0.4, panValue = 28 },
+	["DraeneiFemale"] = { panMaxLeft = -0.3, panMaxRight = 0.3, panMaxTop = 1.4, panMaxBottom = -0.3, panValue = 31 },
 
-	["OrcMale"] = {panMaxLeft = -0.7, panMaxRight = 0.8, panMaxTop = 1.2, panMaxBottom = -0.3, panValue = 30},
-	["OrcFemale"] = {panMaxLeft = -0.4, panMaxRight = 0.3, panMaxTop = 1.2, panMaxBottom = -0.3, panValue = 37},
-	["ScourgeMale"] = {panMaxLeft = -0.4, panMaxRight = 0.4, panMaxTop = 1.1, panMaxBottom = -0.3, panValue = 35},
-	["ScourgeFemale"] = {panMaxLeft = -0.3, panMaxRight = 0.4, panMaxTop = 1.1, panMaxBottom = -0.3, panValue = 36},
-	["TaurenMale"] = {panMaxLeft = -0.7, panMaxRight = 0.9, panMaxTop = 1.1, panMaxBottom = -0.5, panValue = 31},
-	["TaurenFemale"] = {panMaxLeft = -0.5, panMaxRight = 0.6, panMaxTop = 1.3, panMaxBottom = -0.4, panValue = 32},
-	["TrollMale"] = {panMaxLeft = -0.5, panMaxRight = 0.6, panMaxTop = 1.3, panMaxBottom = -0.4, panValue = 27},
-	["TrollFemale"] = {panMaxLeft = -0.4, panMaxRight = 0.4, panMaxTop = 1.5, panMaxBottom = -0.4, panValue = 31},
-	["BloodElfMale"] = {panMaxLeft = -0.5, panMaxRight = 0.4, panMaxTop = 1.3, panMaxBottom = -0.3, panValue = 36},
-	["BloodElfFemale"] = {panMaxLeft = -0.3, panMaxRight = 0.2, panMaxTop = 1.2, panMaxBottom = -0.3, panValue = 38},
+	["OrcMale"] = { panMaxLeft = -0.7, panMaxRight = 0.8, panMaxTop = 1.2, panMaxBottom = -0.3, panValue = 30 },
+	["OrcFemale"] = { panMaxLeft = -0.4, panMaxRight = 0.3, panMaxTop = 1.2, panMaxBottom = -0.3, panValue = 37 },
+	["ScourgeMale"] = { panMaxLeft = -0.4, panMaxRight = 0.4, panMaxTop = 1.1, panMaxBottom = -0.3, panValue = 35 },
+	["ScourgeFemale"] = { panMaxLeft = -0.3, panMaxRight = 0.4, panMaxTop = 1.1, panMaxBottom = -0.3, panValue = 36 },
+	["TaurenMale"] = { panMaxLeft = -0.7, panMaxRight = 0.9, panMaxTop = 1.1, panMaxBottom = -0.5, panValue = 31 },
+	["TaurenFemale"] = { panMaxLeft = -0.5, panMaxRight = 0.6, panMaxTop = 1.3, panMaxBottom = -0.4, panValue = 32 },
+	["TrollMale"] = { panMaxLeft = -0.5, panMaxRight = 0.6, panMaxTop = 1.3, panMaxBottom = -0.4, panValue = 27 },
+	["TrollFemale"] = { panMaxLeft = -0.4, panMaxRight = 0.4, panMaxTop = 1.5, panMaxBottom = -0.4, panValue = 31 },
+	["BloodElfMale"] = { panMaxLeft = -0.5, panMaxRight = 0.4, panMaxTop = 1.3, panMaxBottom = -0.3, panValue = 36 },
+	["BloodElfFemale"] = { panMaxLeft = -0.3, panMaxRight = 0.2, panMaxTop = 1.2, panMaxBottom = -0.3, panValue = 38 },
 }
 
 local playerRaceSex
@@ -50,9 +50,9 @@ do
 	local _
 	_, playerRaceSex = UnitRace("player")
 	if UnitSex("player") == 2 then
-		playerRaceSex = playerRaceSex.."Male"
+		playerRaceSex = playerRaceSex .. "Male"
 	else
-		playerRaceSex = playerRaceSex.."Female"
+		playerRaceSex = playerRaceSex .. "Female"
 	end
 end
 
@@ -64,8 +64,12 @@ function MF:ModelControlButton(model)
 	model.icon:SetTexture([[Interface\AddOns\ElvUI_Enhanced\Media\Textures\UI-ModelControlPanel]])
 	model.icon:SetTexCoord(0.01562500, 0.26562500, 0.00781250, 0.13281250)
 
-	model:SetScript("OnMouseDown", function(self) MF:ModelControlButton_OnMouseDown(self) end)
-	model:SetScript("OnMouseUp", function(self) MF:ModelControlButton_OnMouseUp(self) end)
+	model:SetScript("OnMouseDown", function(self)
+		MF:ModelControlButton_OnMouseDown(self)
+	end)
+	model:SetScript("OnMouseUp", function(self)
+		MF:ModelControlButton_OnMouseUp(self)
+	end)
 	model:SetScript("OnEnter", function(self)
 		UIFrameFadeIn(self:GetParent(), 0.2, self:GetParent():GetAlpha(), 1)
 		if GetCVar("UberTooltips") == "1" then
@@ -283,7 +287,7 @@ function MF:Model_OnUpdate(frame, elapsedTime, rotationsPerSecond)
 		local modelScale = frame:GetModelScale()
 		local cursorX, cursorY = GetCursorPosition()
 		local scale = UIParent:GetEffectiveScale()
-		ModelPanningFrame:Point("BOTTOMLEFT", cursorX / scale - 16, cursorY / scale - 16)	-- half the texture size to center it on the cursor
+		ModelPanningFrame:Point("BOTTOMLEFT", cursorX / scale - 16, cursorY / scale - 16) -- half the texture size to center it on the cursor
 		-- settings
 		local settings = modelSettings[playerRaceSex]
 
@@ -321,8 +325,8 @@ function MF:Model_OnUpdate(frame, elapsedTime, rotationsPerSecond)
 		leftButton = frame.controlFrame.rotateLeftButton
 		rightButton = frame.controlFrame.rotateRightButton
 	else
-		leftButton = frame:GetName() and _G[frame:GetName().."RotateLeftButton"]
-		rightButton = frame:GetName() and _G[frame:GetName().."RotateRightButton"]
+		leftButton = frame:GetName() and _G[frame:GetName() .. "RotateLeftButton"]
+		rightButton = frame:GetName() and _G[frame:GetName() .. "RotateRightButton"]
 	end
 
 	if leftButton and leftButton:GetButtonState() == "PUSHED" then
@@ -403,7 +407,9 @@ function MF:ADDON_LOADED(event, addon)
 end
 
 function MF:Initialize()
-	if not E.private.enhanced.character.modelFrames then return end
+	if not E.private.enhanced.character.modelFrames then
+		return
+	end
 
 	for i = 1, #modelFrames do
 		local model = _G[modelFrames[i]]
@@ -411,8 +417,8 @@ function MF:Initialize()
 		model:EnableMouse(true)
 		model:EnableMouseWheel(true)
 
-		_G[modelFrames[i].."RotateLeftButton"]:Kill()
-		_G[modelFrames[i].."RotateRightButton"]:Kill()
+		_G[modelFrames[i] .. "RotateLeftButton"]:Kill()
+		_G[modelFrames[i] .. "RotateRightButton"]:Kill()
 
 		self:ModelWithControls(model)
 	end

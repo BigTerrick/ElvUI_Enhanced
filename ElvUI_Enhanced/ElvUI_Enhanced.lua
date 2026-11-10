@@ -49,7 +49,7 @@ local function gsPopupShow()
 		end,
 		OnEditFocusGained = function(self)
 			self:HighlightText()
-		end
+		end,
 	}
 
 	E:StaticPopup_Show("GS_VERSION_INVALID")
@@ -127,9 +127,12 @@ function addon:DBConversions()
 
 		if E.db.general.minimap.buttons.insideMinimap then
 			E.db.enhanced.minimap.buttonGrabber.insideMinimap.enable = E.db.general.minimap.buttons.insideMinimap.enable
-			E.db.enhanced.minimap.buttonGrabber.insideMinimap.position = E.db.general.minimap.buttons.insideMinimap.position
-			E.db.enhanced.minimap.buttonGrabber.insideMinimap.xOffset = E.db.general.minimap.buttons.insideMinimap.xOffset
-			E.db.enhanced.minimap.buttonGrabber.insideMinimap.yOffset = E.db.general.minimap.buttons.insideMinimap.yOffset
+			E.db.enhanced.minimap.buttonGrabber.insideMinimap.position =
+				E.db.general.minimap.buttons.insideMinimap.position
+			E.db.enhanced.minimap.buttonGrabber.insideMinimap.xOffset =
+				E.db.general.minimap.buttons.insideMinimap.xOffset
+			E.db.enhanced.minimap.buttonGrabber.insideMinimap.yOffset =
+				E.db.general.minimap.buttons.insideMinimap.yOffset
 		end
 
 		E.db.general.minimap.buttons = nil
@@ -151,9 +154,14 @@ end
 
 function addon:PrintAddonMerged(mergedAddonName)
 	local _, _, _, enabled, _, reason = GetAddOnInfo(mergedAddonName)
-	if reason == "MISSING" then return end
+	if reason == "MISSING" then
+		return
+	end
 
-	local text = format(L["Addon |cffFFD100%s|r was merged into |cffFFD100ElvUI_Enhanced|r.\nPlease remove it to avoid conflicts."], mergedAddonName)
+	local text = format(
+		L["Addon |cffFFD100%s|r was merged into |cffFFD100ElvUI_Enhanced|r.\nPlease remove it to avoid conflicts."],
+		mergedAddonName
+	)
 	E:Print(text)
 
 	if enabled then
@@ -165,7 +173,7 @@ function addon:PrintAddonMerged(mergedAddonName)
 					ReloadUI()
 				end,
 				whileDead = 1,
-				hideOnEscape = false
+				hideOnEscape = false,
 			}
 		end
 

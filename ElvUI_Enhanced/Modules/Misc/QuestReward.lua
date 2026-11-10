@@ -9,12 +9,12 @@ local GetNumQuestChoices = GetNumQuestChoices
 local GetQuestItemLink = GetQuestItemLink
 
 local function SelectQuestReward(id)
-	local button = _G["QuestInfoItem"..id]
+	local button = _G["QuestInfoItem" .. id]
 
 	if button.type == "choice" then
 		if E.private.skins.blizzard.enable and E.private.skins.blizzard.quest then
 			_G[button:GetName()]:SetBackdropBorderColor(1, 0.80, 0.10)
-			_G[button:GetName().."Name"]:SetTextColor(1, 0.80, 0.10)
+			_G[button:GetName() .. "Name"]:SetTextColor(1, 0.80, 0.10)
 
 			if _G[button:GetName()].backdrop then
 				_G[button:GetName()].backdrop:SetBackdropBorderColor(1, 0.80, 0.10)
@@ -31,7 +31,9 @@ end
 
 function M:QUEST_COMPLETE()
 	local numItems = GetNumQuestChoices()
-	if numItems <= 0 then return end
+	if numItems <= 0 then
+		return
+	end
 
 	local link, sellPrice
 	local choiceID, maxPrice = 1, 0

@@ -6,6 +6,7 @@
 	<Script file="koKR.lua"/>
 	<Script file="ptBR.lua"/>
 	<Script file="ruRU.lua"/>
+	<Script file="ukUA.lua"/>
 	<Script file="zhTW.lua"/>
 	<Script file="zhCN.lua"/>
 </Ui>

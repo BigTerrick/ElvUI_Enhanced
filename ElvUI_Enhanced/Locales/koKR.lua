@@ -1,11 +1,12 @@
-local E = unpack(ElvUI); --Import: Engine, Locales, PrivateDB, ProfileDB, GlobalDB
+local E = unpack(ElvUI) --Import: Engine, Locales, PrivateDB, ProfileDB, GlobalDB
 local L = E.Libs.ACL:NewLocale("ElvUI", "koKR")
 
 -- DESC locales
 L["ENH_LOGIN_MSG"] = "You are using |cff1784d1ElvUI Enhanced|r |cffff8000(WotLK)|r version %s%s|r."
 L["DURABILITY_DESC"] = "Adjust the settings for the durability information on the character screen."
 L["ITEMLEVEL_DESC"] = "Adjust the settings for the item level information on the character screen."
-L["WATCHFRAME_DESC"] = "Adjust the settings for the visibility of the watchframe (questlog) to your personal preference."
+L["WATCHFRAME_DESC"] =
+	"Adjust the settings for the visibility of the watchframe (questlog) to your personal preference."
 
 -- Incompatibility
 L["GearScore '3.1.20b - Release' is not for WotLK. Download 3.1.7. Disable this version?"] = true
@@ -72,12 +73,16 @@ L["Add button to Trainer frame with ability to train all available skills in one
 L["Alt-Click Merchant"] = true
 L["Already Known"] = true
 L["Animated Achievement Bars"] = true
-L["Automatically change your watched faction on the reputation bar to the faction you got reputation points for."] = true
+L["Automatically change your watched faction on the reputation bar to the faction you got reputation points for."] =
+	true
 L["Automatically release body when killed inside a battleground."] = true
 L["Automatically select the quest reward with the highest vendor sell value."] = true
 L["Change color of item icons which already known."] = true
 L["Changes the transparency of all the movers."] = true
+L["Color quests by difficulty and progress in the Quest Tracker."] = true
+L["Colorize Quests"] = true
 L["Display quest levels at Quest Log."] = true
+L["Display quest levels at Quest Tracker."] = true
 L["Hide Zone Text"] = true
 L["Holding Alt key while buying something from vendor will now buy an entire stack."] = true
 L["Mover Transparency"] = true
@@ -121,7 +126,8 @@ L["Hook DBM"] = true
 
 -- Tooltip
 L["Check Player"] = true
-L["Check achievement completion instead of boss kill stats.\nSome servers log incorrect boss kill statistics, this is an alternative way to get player progress."] = true
+L["Check achievement completion instead of boss kill stats.\nSome servers log incorrect boss kill statistics, this is an alternative way to get player progress."] =
+	true
 L["Colorize the tooltip border based on item quality."] = true
 L["Icecrown Citadel"] = true
 L["Item Border Color"] = true

@@ -19,8 +19,8 @@ local slots = {
 	["ShoulderSlot"] = true,
 	["BackSlot"] = false,
 	["ChestSlot"] = true,
---	["ShirtSlot"] = false,
---	["TabardSlot"] = false,
+	--	["ShirtSlot"] = false,
+	--	["TabardSlot"] = false,
 	["WristSlot"] = true,
 	["HandsSlot"] = true,
 	["WaistSlot"] = true,
@@ -33,11 +33,13 @@ local slots = {
 	["MainHandSlot"] = true,
 	["SecondaryHandSlot"] = true,
 	["RangedSlot"] = true,
---	["AmmoSlot"] = false,
+	--	["AmmoSlot"] = false,
 }
 
 function EI:UpdatePaperDoll(unit)
-	if not self.initialized then return end
+	if not self.initialized then
+		return
+	end
 
 	if unit == "player" and InCombatLockdown() then
 		self:RegisterEvent("PLAYER_REGEN_ENABLED", "OnEvent")
@@ -46,7 +48,9 @@ function EI:UpdatePaperDoll(unit)
 		if InspectFrame then
 			unit = InspectFrame.unit
 
-			if not unit then return end
+			if not unit then
+				return
+			end
 		else
 			return
 		end
@@ -94,9 +98,17 @@ function EI:UpdatePaperDoll(unit)
 				if E.db.enhanced.equipment.durability.enable then
 					current, maximum = GetInventoryItemDurability(slotID)
 
-					if current and maximum and (not E.db.enhanced.equipment.durability.onlydamaged or current < maximum) then
+					if
+						current
+						and maximum
+						and (not E.db.enhanced.equipment.durability.onlydamaged or current < maximum)
+					then
 						r, g, b = E:ColorGradient((current / maximum), 1, 0, 0, 1, 1, 0, 0, 1, 0)
-						frame.DurabilityInfo:SetFormattedText("%s%.0f%%|r", E:RGBToHex(r, g, b), (current / maximum) * 100)
+						frame.DurabilityInfo:SetFormattedText(
+							"%s%.0f%%|r",
+							E:RGBToHex(r, g, b),
+							(current / maximum) * 100
+						)
 					end
 				end
 			end
@@ -165,7 +177,9 @@ function EI:OnEvent(event, unit)
 end
 
 function EI:InitialUpdatePaperDoll()
-	if self.initialized then return end
+	if self.initialized then
+		return
+	end
 
 	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 	self:BuildInfoText("Character")
@@ -218,15 +232,15 @@ function EI:ToggleState(init)
 		self:UnregisterAllEvents()
 
 		for slotName, durability in pairs(slots) do
-			_G["Character"..slotName].ItemLevel:SetText()
+			_G["Character" .. slotName].ItemLevel:SetText()
 
 			if durability then
-				_G["Character"..slotName].DurabilityInfo:SetText()
+				_G["Character" .. slotName].DurabilityInfo:SetText()
 			end
 
 			if self.initializedInspect then
-				if _G["Inspect"..slotName].ItemLevel then
-					_G["Inspect"..slotName].ItemLevel:SetText()
+				if _G["Inspect" .. slotName].ItemLevel then
+					_G["Inspect" .. slotName].ItemLevel:SetText()
 				end
 			end
 		end
@@ -234,7 +248,9 @@ function EI:ToggleState(init)
 end
 
 function EI:Initialize()
-	if not E.db.enhanced.equipment.enable then return end
+	if not E.db.enhanced.equipment.enable then
+		return
+	end
 
 	self:ToggleState(true)
 end

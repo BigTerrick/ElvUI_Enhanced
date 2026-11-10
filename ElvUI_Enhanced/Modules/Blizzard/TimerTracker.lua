@@ -10,12 +10,12 @@ local GetTime = GetTime
 local UnitFactionGroup = UnitFactionGroup
 
 local timerTypes = {
-	["30-120"] = {1, 30, 120},
-	["60-120"] = {1, 60, 120},
-	["120-120"] = {1, 120, 120},
-	["15-60"] = {1, 15, 60},
-	["30-60"] = {1, 30, 60},
-	["60-60"] = {1, 60, 60},
+	["30-120"] = { 1, 30, 120 },
+	["60-120"] = { 1, 60, 120 },
+	["120-120"] = { 1, 120, 120 },
+	["15-60"] = { 1, 15, 60 },
+	["30-60"] = { 1, 30, 60 },
+	["60-60"] = { 1, 60, 60 },
 }
 
 local chatMessage = {
@@ -86,7 +86,7 @@ local chatMessage = {
 	-- Arena
 	["Fifteen seconds until the Arena battle begins!"] = timerTypes["15-60"],
 	["Thirty seconds until the Arena battle begins!"] = timerTypes["30-60"],
-	["One minute until the Arena battle begins!"] = timerTypes["60-60"]
+	["One minute until the Arena battle begins!"] = timerTypes["60-60"],
 }
 
 local TIMER_MINUTES_DISPLAY = "%d:%02d"
@@ -95,27 +95,30 @@ local TIMER_TYPE_CHALLENGE_MODE = 2
 local TIMER_TYPE_PLAYER_COUNTDOWN = 3
 
 local TIMER_DATA = {
-	[1] = {mediumMarker = 11, largeMarker = 6, updateInterval = 10},
-	[2] = {mediumMarker = 100, largeMarker = 100, updateInterval = 100},
-	[3] = {mediumMarker = 31, largeMarker = 11, updateInterval = 10}
+	[1] = { mediumMarker = 11, largeMarker = 6, updateInterval = 10 },
+	[2] = { mediumMarker = 100, largeMarker = 100, updateInterval = 100 },
+	[3] = { mediumMarker = 31, largeMarker = 11, updateInterval = 10 },
 }
 
 local TIMER_NUMBERS_SETS = {}
 TIMER_NUMBERS_SETS["BigGold"] = {
 	texture = [[Interface\AddOns\ElvUI_Enhanced\media\textures\BigTimerNumbers]],
-	w = 256, h = 170, texW = 1024, texH = 512,
+	w = 256,
+	h = 170,
+	texW = 1024,
+	texH = 512,
 	numberHalfWidths = {
-		35/128, -- 0
-		14/128, -- 1
-		33/128, -- 2
-		32/128, -- 3
-		36/128, -- 4
-		32/128, -- 5
-		33/128, -- 6
-		29/128, -- 7
-		31/128, -- 8
-		31/128, -- 9
-	}
+		35 / 128, -- 0
+		14 / 128, -- 1
+		33 / 128, -- 2
+		32 / 128, -- 3
+		36 / 128, -- 4
+		32 / 128, -- 5
+		33 / 128, -- 6
+		29 / 128, -- 7
+		31 / 128, -- 8
+		31 / 128, -- 9
+	},
 }
 
 local function CreateAlphaAnim(group, order, duration, change, delay, smoothing)
@@ -198,7 +201,7 @@ local function FadeBarOut_OnFinished(self)
 end
 
 function TT:CreateTimerBar()
-	local timer = CreateFrame("Frame", "ElvUI_Timer"..(#self.timerList + 1), UIParent)
+	local timer = CreateFrame("Frame", "ElvUI_Timer" .. (#self.timerList + 1), UIParent)
 	timer:Size(206, 26)
 
 	timer.GoFrame = CreateFrame("Frame", "$parentGoFrame", timer)
@@ -289,7 +292,9 @@ function TT:CreateTimerBar()
 end
 
 function TT:CreateTimer(timerType, timeSeconds, totalTime)
-	if not timerType then return end
+	if not timerType then
+		return
+	end
 
 	local timer
 	local isTimerRunning = false
@@ -337,8 +342,8 @@ function TT:CreateTimer(timerType, timeSeconds, totalTime)
 		timer.Digit2.width = timer.style.w / 2
 		timer.Digit1:SetTexture(timer.style.texture)
 		timer.Digit2:SetTexture(timer.style.texture)
-		timer.Digit1.Glow:SetTexture(timer.style.texture.."Glow")
-		timer.Digit2.Glow:SetTexture(timer.style.texture.."Glow")
+		timer.Digit1.Glow:SetTexture(timer.style.texture .. "Glow")
+		timer.Digit2.Glow:SetTexture(timer.style.texture .. "Glow")
 
 		timer.updateTime = TIMER_DATA[timer.type].updateInterval
 		timer:SetScript("OnUpdate", self.BigNumberOnUpdate)
@@ -379,13 +384,13 @@ function TT:BigNumberOnUpdate(elapsed)
 	local minutes, seconds = floor(self.time / 60), floor(fmod(self.time, 60))
 	self.StatusBar.Text:SetFormattedText(TIMER_MINUTES_DISPLAY, minutes, seconds)
 
-	local r, g, b = E:ColorGradient((self.time - 10) / self.totalTime, 1,0,0, 1,1,0, 0,1,0)
+	local r, g, b = E:ColorGradient((self.time - 10) / self.totalTime, 1, 0, 0, 1, 1, 0, 0, 1, 0)
 	self.StatusBar:SetStatusBarColor(r, g, b)
 	self.StatusBar.Background:SetVertexColor(r * 0.25, g * 0.25, b * 0.25)
 end
 
 function TT:SetTexNumbers(timer, ...)
-	local digits = {...}
+	local digits = { ... }
 	local timeDigits = floor(timer.time)
 	local style = timer.style
 
@@ -443,8 +448,10 @@ function TT:SetGoTexture(timer)
 		local factionGroup = UnitFactionGroup("player")
 
 		if factionGroup and factionGroup ~= "Neutral" then
-			timer.GoTexture:SetTexture([[Interface\AddOns\ElvUI\media\textures\]]..factionGroup.."-Logo")
-			timer.GoTextureGlow:SetTexture([[Interface\AddOns\ElvUI_Enhanced\media\textures\]]..factionGroup.."Glow-Logo")
+			timer.GoTexture:SetTexture([[Interface\AddOns\ElvUI\media\textures\]] .. factionGroup .. "-Logo")
+			timer.GoTextureGlow:SetTexture(
+				[[Interface\AddOns\ElvUI_Enhanced\media\textures\]] .. factionGroup .. "Glow-Logo"
+			)
 		end
 	elseif timer.type == TIMER_TYPE_CHALLENGE_MODE then
 		timer.GoTexture:SetTexture([[Interface\AddOns\ElvUI_Enhanced\media\textures\Challenges-Logo]])
@@ -481,7 +488,9 @@ function TT:OnEvent(event, msg)
 end
 
 function TT:HookDBM()
-	if not DBM then return end
+	if not DBM then
+		return
+	end
 
 	if E.db.enhanced.timerTracker.dbm then
 		self:SecureHook(DBM, "CreatePizzaTimer", function(_, time, text)
@@ -514,7 +523,9 @@ function TT:ToggleState()
 end
 
 function TT:Initialize()
-	if not E.db.enhanced.timerTracker.enable then return end
+	if not E.db.enhanced.timerTracker.enable then
+		return
+	end
 
 	self:ToggleState()
 end

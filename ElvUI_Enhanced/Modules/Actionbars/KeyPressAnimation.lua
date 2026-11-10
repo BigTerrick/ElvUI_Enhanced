@@ -16,7 +16,7 @@ end
 local function CreateAnimationFrame()
 	local db = E.db.enhanced.actionbar.keyPressAnimation
 
-	local frame = CreateFrame("Frame", "Enhanced_KeyPressAnimation"..(#KPA.frames + 1), UIParent)
+	local frame = CreateFrame("Frame", "Enhanced_KeyPressAnimation" .. (#KPA.frames + 1), UIParent)
 
 	local texture = frame:CreateTexture()
 	texture:SetTexture([[Interface\Cooldown\star4]])
@@ -61,7 +61,9 @@ local function CreateAnimationFrame()
 end
 
 local function StartAnimation(button)
-	if not button:IsVisible() or button:GetParent():GetAlpha() == 0 then return end
+	if not button:IsVisible() or button:GetParent():GetAlpha() == 0 then
+		return
+	end
 
 	local frame = KPA:GetFreeAnimationFrame()
 	local animationGroup = frame.animationGroup
@@ -90,7 +92,9 @@ function KPA:UpdateSetting()
 end
 
 function KPA:Initialize()
-	if not E.private.enhanced.actionbar.keyPressAnimation then return end
+	if not E.private.enhanced.actionbar.keyPressAnimation then
+		return
+	end
 
 	self.frames = {}
 

@@ -32,10 +32,18 @@ end
 local function portraitHDModelFix(self)
 	if self:IsObjectType("Model") then
 		local model = self:GetModel()
-		if type(model) ~= "string" then return end
+		if type(model) ~= "string" then
+			return
+		end
 
 		if E.db.enhanced.unitframe.portraitHDModelFix.debug then
-			E:Print(format("|cffc79c6eUnit:|r %s; |cffc79c6eModel:|r %s", self:GetParent().unitframeType, gsub(model, ".+\\(%S+%.m2)", "%1")))
+			E:Print(
+				format(
+					"|cffc79c6eUnit:|r %s; |cffc79c6eModel:|r %s",
+					self:GetParent().unitframeType,
+					gsub(model, ".+\\(%S+%.m2)", "%1")
+				)
+			)
 		end
 
 		model = lower(model)
@@ -50,19 +58,21 @@ local function portraitHDModelFix(self)
 end
 
 local unitTypes = {
-	{"player", "target", "targettarget", "targettargettarget", "focus", "focustarget", "pet", "pettarget"},
-	{"party", "raid", "raid40"},
-	{"boss", "arena"},
+	{ "player", "target", "targettarget", "targettargettarget", "focus", "focustarget", "pet", "pettarget" },
+	{ "party", "raid", "raid40" },
+	{ "boss", "arena" },
 }
 
 function UFPM:UpdatePortraits()
-	if not self.HDModelFound then return end
+	if not self.HDModelFound then
+		return
+	end
 
 	twipe(self.modelsToFix)
 	local modelList = gsub(E.db.enhanced.unitframe.portraitHDModelFix.modelsToFix, "%s+", "")
 
 	if modelList ~= "" then
-		for _, modelName in ipairs({split(";", modelList)}) do
+		for _, modelName in ipairs({ split(";", modelList) }) do
 			if modelName ~= "" then
 				tinsert(self.modelsToFix, lower(modelName))
 			end
@@ -83,7 +93,9 @@ function UFPM:UpdatePortraits()
 end
 
 function UFPM:ToggleState()
-	if not self.HDModelFound then return end
+	if not self.HDModelFound then
+		return
+	end
 
 	if E.db.enhanced.unitframe.portraitHDModelFix.enable then
 		if not self.hooked then
@@ -114,12 +126,16 @@ function UFPM:ToggleState()
 end
 
 function UFPM:Initialize()
-	if not E.private.unitframe.enable then return end
+	if not E.private.unitframe.enable then
+		return
+	end
 
 	self.modelsToFix = {}
 	self.HDModelFound = checkHDModels()
 
-	if not E.db.enhanced.unitframe.portraitHDModelFix.enable then return end
+	if not E.db.enhanced.unitframe.portraitHDModelFix.enable then
+		return
+	end
 
 	self:ToggleState()
 end

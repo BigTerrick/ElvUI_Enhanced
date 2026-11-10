@@ -96,7 +96,13 @@ local function OnEnter(self)
 				used = total - free
 
 				DT.tooltip:AddLine(subclass)
-				DT.tooltip:AddDoubleLine(join("", format(iconString, texture), "  ", name), format("%d / %d", used, total), r, g, b)
+				DT.tooltip:AddDoubleLine(
+					join("", format(iconString, texture), "  ", name),
+					format("%d / %d", used, total),
+					r,
+					g,
+					b
+				)
 			end
 		end
 	end
@@ -131,4 +137,13 @@ local function ValueColorUpdate(hex)
 end
 E.valueColorUpdateFuncs[ValueColorUpdate] = true
 
-DT:RegisterDatatext(INVTYPE_AMMO, {"PLAYER_ENTERING_WORLD", "BAG_UPDATE", "UNIT_INVENTORY_CHANGED"}, OnEvent, nil, OnClick, OnEnter, nil, EE:ColorizeSettingName(L["Ammo/Shard Counter"]))
+DT:RegisterDatatext(
+	INVTYPE_AMMO,
+	{ "PLAYER_ENTERING_WORLD", "BAG_UPDATE", "UNIT_INVENTORY_CHANGED" },
+	OnEvent,
+	nil,
+	OnClick,
+	OnEnter,
+	nil,
+	EE:ColorizeSettingName(L["Ammo/Shard Counter"])
+)

@@ -15,25 +15,25 @@ local GetTime = GetTime
 local COMBATLOG_OBJECT_REACTION_HOSTILE = COMBATLOG_OBJECT_REACTION_HOSTILE
 
 local spellList = {
-	[72] = 12,		-- Shield Bash
-	[408] = 20,		-- Kidney Shot
-	[1766] = 10,	-- Kick
-	[2139] = 24,	-- Counterspell
-	[6552] = 10,	-- Pummel
-	[10890] = 23,	-- Psychic Scream
-	[15487] = 45,	-- Silence
-	[16979] = 15,	-- Feral Charge
-	[19503] = 30,	-- Scatter Shot
-	[19647] = 24,	-- Spell Lock
-	[23920] = 10,	-- Spell Reflection
-	[31224] = 90,	-- Cloak of Shadows
-	[34490] = 30,	-- Silencing Shot
-	[44572] = 30,	-- Deep Freeze
-	[47528] = 10,	-- Mind Freeze
-	[48707] = 45,	-- Anti-Magic Shell
-	[49916] = 120,	-- Strangulate
-	[51514] = 45,	-- Hex
-	[57994] = 6,	-- Wind Shear
+	[72] = 12, -- Shield Bash
+	[408] = 20, -- Kidney Shot
+	[1766] = 10, -- Kick
+	[2139] = 24, -- Counterspell
+	[6552] = 10, -- Pummel
+	[10890] = 23, -- Psychic Scream
+	[15487] = 45, -- Silence
+	[16979] = 15, -- Feral Charge
+	[19503] = 30, -- Scatter Shot
+	[19647] = 24, -- Spell Lock
+	[23920] = 10, -- Spell Reflection
+	[31224] = 90, -- Cloak of Shadows
+	[34490] = 30, -- Silencing Shot
+	[44572] = 30, -- Deep Freeze
+	[47528] = 10, -- Mind Freeze
+	[48707] = 45, -- Anti-Magic Shell
+	[49916] = 120, -- Strangulate
+	[51514] = 45, -- Hex
+	[57994] = 6, -- Wind Shear
 }
 
 local column = 5 -- max number of interrupt icons show per column
@@ -42,7 +42,9 @@ local iconTotal = 0
 local activeIcons = {}
 
 local function UpdateIconTimer(self, elapsed)
-	if not self.expirationTime then return end
+	if not self.expirationTime then
+		return
+	end
 
 	self.expirationTime = self.expirationTime - elapsed
 
@@ -111,7 +113,7 @@ function IT:UpdateIcon(index, cooldown, texture)
 end
 
 function IT:CreateIcon(i)
-	self.icons[i] = CreateFrame("Frame", "ElvUI_InterruptIcon"..i, self.header)
+	self.icons[i] = CreateFrame("Frame", "ElvUI_InterruptIcon" .. i, self.header)
 	self.icons[i]:Size(self.db.size)
 	self.icons[i]:SetTemplate()
 
@@ -119,14 +121,25 @@ function IT:CreateIcon(i)
 	self.icons[i].texture:SetInside()
 	self.icons[i].texture:SetTexCoord(unpack(E.TexCoords))
 
-	self.icons[i].cooldown = CreateFrame("Cooldown", self.icons[i]:GetName().."Cooldown", self.icons[i], "CooldownFrameTemplate")
+	self.icons[i].cooldown =
+		CreateFrame("Cooldown", self.icons[i]:GetName() .. "Cooldown", self.icons[i], "CooldownFrameTemplate")
 	self.icons[i].cooldown:SetInside()
 
 	self.icons[i].timerText = self.icons[i].cooldown:CreateFontString("$parentTimeText", "OVERLAY")
 	local x, y = E:GetXYOffset(self.db.text.position)
 	self.icons[i].timerText:ClearAllPoints()
-	self.icons[i].timerText:Point(self.db.text.position, self.icons[i], self.db.text.position, x + self.db.text.xOffset, y + self.db.text.yOffset)
-	self.icons[i].timerText:FontTemplate(E.LSM:Fetch("font", self.db.text.font), self.db.text.fontSize, self.db.text.fontOutline)
+	self.icons[i].timerText:Point(
+		self.db.text.position,
+		self.icons[i],
+		self.db.text.position,
+		x + self.db.text.xOffset,
+		y + self.db.text.yOffset
+	)
+	self.icons[i].timerText:FontTemplate(
+		E.LSM:Fetch("font", self.db.text.font),
+		self.db.text.fontSize,
+		self.db.text.fontOutline
+	)
 
 	if i == 1 then
 		self.icons[i]:Point("CENTER", self.header, "CENTER", -2, -6)
@@ -134,10 +147,10 @@ function IT:CreateIcon(i)
 		local row = ceil(i / column)
 
 		if numRows ~= row then
-			self.icons[i]:Point("RIGHT", self.icons[i-column], "LEFT", -6, 0)
+			self.icons[i]:Point("RIGHT", self.icons[i - column], "LEFT", -6, 0)
 			numRows = row
 		else
-			self.icons[i]:Point("TOP", self.icons[i-1], "BOTTOM", 0, -6)
+			self.icons[i]:Point("TOP", self.icons[i - 1], "BOTTOM", 0, -6)
 		end
 	end
 
@@ -157,7 +170,9 @@ function IT:Update(cooldown, texture)
 		end
 	end
 
-	if found then return end
+	if found then
+		return
+	end
 
 	local i = iconTotal + 1
 	self:CreateIcon(i)
@@ -175,8 +190,18 @@ function IT:UpdateAllIconsTimers()
 			icon:Size(self.db.size)
 
 			icon.timerText:ClearAllPoints()
-			icon.timerText:Point(self.db.text.position, icon, self.db.text.position, x + self.db.text.xOffset, y + self.db.text.yOffset)
-			icon.timerText:FontTemplate(E.LSM:Fetch("font", self.db.text.font), self.db.text.fontSize, self.db.text.fontOutline)
+			icon.timerText:Point(
+				self.db.text.position,
+				icon,
+				self.db.text.position,
+				x + self.db.text.xOffset,
+				y + self.db.text.yOffset
+			)
+			icon.timerText:FontTemplate(
+				E.LSM:Fetch("font", self.db.text.font),
+				self.db.text.fontSize,
+				self.db.text.fontOutline
+			)
 		end
 	end
 end
@@ -193,7 +218,9 @@ end
 
 function IT:COMBAT_LOG_EVENT_UNFILTERED(event, _, subEvent, sourceGUID, _, sourceFlags, _, _, _, spellID)
 	if subEvent == "SPELL_CAST_SUCCESS" and spellList[spellID] then
-		if sourceGUID and (band(sourceFlags, COMBATLOG_OBJECT_REACTION_HOSTILE) == COMBATLOG_OBJECT_REACTION_HOSTILE) then
+		if
+			sourceGUID and (band(sourceFlags, COMBATLOG_OBJECT_REACTION_HOSTILE) == COMBATLOG_OBJECT_REACTION_HOSTILE)
+		then
 			local _, _, texture = GetSpellInfo(spellID)
 			self:Update(spellList[spellID], texture)
 		end
@@ -207,7 +234,11 @@ end
 
 function IT:UpdateState()
 	local _, zoneType = GetInstanceInfo()
-	if E.private.enhanced.interruptTracker.everywhere or (E.private.enhanced.interruptTracker.arena and zoneType == "arena") or (E.private.enhanced.interruptTracker.battleground and zoneType == "pvp") then
+	if
+		E.private.enhanced.interruptTracker.everywhere
+		or (E.private.enhanced.interruptTracker.arena and zoneType == "arena")
+		or (E.private.enhanced.interruptTracker.battleground and zoneType == "pvp")
+	then
 		self:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 	else
 		self:UnregisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
@@ -215,7 +246,9 @@ function IT:UpdateState()
 end
 
 function IT:Initialize()
-	if not E.private.enhanced.interruptTracker.enable then return end
+	if not E.private.enhanced.interruptTracker.enable then
+		return
+	end
 
 	self.db = E.db.enhanced.interruptTracker
 	self.icons = {}
@@ -224,7 +257,7 @@ function IT:Initialize()
 	self.header:Size(50)
 	self.header:Point("CENTER", -300, 50)
 
-	E:CreateMover(self.header, self.header:GetName().."Mover", L["Interrupt Tracker"])
+	E:CreateMover(self.header, self.header:GetName() .. "Mover", L["Interrupt Tracker"])
 
 	self:RegisterEvent("PLAYER_ENTERING_WORLD")
 	self:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")

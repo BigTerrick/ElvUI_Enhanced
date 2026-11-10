@@ -7,8 +7,12 @@ local function Configure_Portrait(self, frame)
 		local db = E.db.enhanced.unitframe.detachPortrait[frame.unitframeType]
 
 		frame.PORTRAIT_DETACHED = frame.USE_PORTRAIT and db.enable and not frame.USE_PORTRAIT_OVERLAY
-		frame.PORTRAIT_WIDTH = (frame.USE_PORTRAIT_OVERLAY or frame.PORTRAIT_DETACHED or not frame.USE_PORTRAIT) and 0 or frame.db.portrait.width
-		frame.CLASSBAR_WIDTH = frame.UNIT_WIDTH - (frame.BORDER + frame.SPACING) * 2 - frame.PORTRAIT_WIDTH - frame.POWERBAR_OFFSET
+		frame.PORTRAIT_WIDTH = (frame.USE_PORTRAIT_OVERLAY or frame.PORTRAIT_DETACHED or not frame.USE_PORTRAIT) and 0
+			or frame.db.portrait.width
+		frame.CLASSBAR_WIDTH = frame.UNIT_WIDTH
+			- (frame.BORDER + frame.SPACING) * 2
+			- frame.PORTRAIT_WIDTH
+			- frame.POWERBAR_OFFSET
 
 		if frame.USE_PORTRAIT then
 			local portrait = frame.Portrait
@@ -28,9 +32,25 @@ local function Configure_Portrait(self, frame)
 					portrait.backdrop:SetOutside(portrait)
 
 					if frame.unitframeType == "player" then
-						E:CreateMover(portrait.Holder, "PlayerPortraitMover", L["Player Portrait"], nil, nil, nil, "ALL,SOLO")
+						E:CreateMover(
+							portrait.Holder,
+							"PlayerPortraitMover",
+							L["Player Portrait"],
+							nil,
+							nil,
+							nil,
+							"ALL,SOLO"
+						)
 					elseif frame.unitframeType == "target" then
-						E:CreateMover(portrait.Holder, "TargetPortraitMover", L["Target Portrait"], nil, nil, nil, "ALL,SOLO")
+						E:CreateMover(
+							portrait.Holder,
+							"TargetPortraitMover",
+							L["Target Portrait"],
+							nil,
+							nil,
+							nil,
+							"ALL,SOLO"
+						)
 					end
 				else
 					portrait.Holder:Size(db.width, db.height)
@@ -66,8 +86,16 @@ function UFDP:ToggleState(unit)
 end
 
 function UFDP:Initialize()
-	if not E.private.unitframe.enable then return end
-	if not (E.db.enhanced.unitframe.detachPortrait.player.enable or E.db.enhanced.unitframe.detachPortrait.target.enable) then return end
+	if not E.private.unitframe.enable then
+		return
+	end
+	if
+		not (
+			E.db.enhanced.unitframe.detachPortrait.player.enable or E.db.enhanced.unitframe.detachPortrait.target.enable
+		)
+	then
+		return
+	end
 
 	self:ToggleState()
 end

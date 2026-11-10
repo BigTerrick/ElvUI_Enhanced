@@ -33,7 +33,7 @@ end
 function M:DUEL_REQUESTED(_, name)
 	StaticPopup_Hide("DUEL_REQUESTED")
 	CancelDuel()
-	E:Print(L["Declined duel request from "]..name)
+	E:Print(L["Declined duel request from "] .. name)
 end
 
 function M:DeclineDuel()

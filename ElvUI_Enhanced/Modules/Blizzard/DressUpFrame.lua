@@ -56,7 +56,9 @@ end
 ]]
 
 function mod:DressUpFrame()
-	if not E.db.enhanced.blizzard.dressUpFrame.enable then return end
+	if not E.db.enhanced.blizzard.dressUpFrame.enable then
+		return
+	end
 
 	DressUpBackgroundTopLeft:SetAlpha(0)
 	DressUpBackgroundTopRight:SetAlpha(0)
@@ -87,11 +89,13 @@ function mod:DressUpFrame()
 	local _, classFileName = UnitClass("player")
 	DressUpFrame.ModelBackground = DressUpFrame:CreateTexture()
 	DressUpFrame.ModelBackground:SetAllPoints(DressUpModel)
-	DressUpFrame.ModelBackground:SetTexture([[Interface\AddOns\ElvUI_Enhanced\Media\Textures\backgrounds\DressingRoom]]..classFileName)
+	DressUpFrame.ModelBackground:SetTexture(
+		[[Interface\AddOns\ElvUI_Enhanced\Media\Textures\backgrounds\DressingRoom]] .. classFileName
+	)
 	DressUpFrame.ModelBackground:SetTexCoord(0.00195312, 0.935547, 0.00195312, 0.978516)
 	DressUpFrame.ModelBackground:SetDesaturated(true)
 
---[[
+	--[[
 	DressUpFrame.OutfitDropDown = CreateFrame("Frame", "DressUpFrameOutfitDropDown", DressUpFrame, "UIDropDownMenuTemplate")
 	DressUpFrame.OutfitDropDown:Point("TOP", -23, -28)
 	S:HandleDropDownBox(DressUpFrame.OutfitDropDown)

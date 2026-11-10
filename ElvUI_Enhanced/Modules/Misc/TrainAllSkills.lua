@@ -85,7 +85,9 @@ function TA:ButtonCreate()
 		self.button:Point("RIGHT", ClassTrainerTrainButton, "LEFT")
 	end
 
-	self.button:SetScript("OnClick", function() TA:TrainAllSkills() end)
+	self.button:SetScript("OnClick", function()
+		TA:TrainAllSkills()
+	end)
 
 	self.button:HookScript("OnEnter", function()
 		local cost = 0
@@ -95,8 +97,14 @@ function TA:ButtonCreate()
 			end
 		end
 
-		GameTooltip:SetOwner(self.button,"ANCHOR_TOPLEFT", 0, 5)
-		GameTooltip:SetText(format("|cffffffff%s|r %s", TABARDVENDORCOST, E:FormatMoney(cost, E.db.datatexts.goldFormat or "BLIZZARD", not E.db.datatexts.goldCoins)))
+		GameTooltip:SetOwner(self.button, "ANCHOR_TOPLEFT", 0, 5)
+		GameTooltip:SetText(
+			format(
+				"|cffffffff%s|r %s",
+				TABARDVENDORCOST,
+				E:FormatMoney(cost, E.db.datatexts.goldFormat or "BLIZZARD", not E.db.datatexts.goldCoins)
+			)
+		)
 	end)
 
 	self.button:HookScript("OnLeave", function()
@@ -105,7 +113,9 @@ function TA:ButtonCreate()
 end
 
 function TA:ButtonUpdate()
-	if self.locked then return end
+	if self.locked then
+		return
+	end
 
 	for i = 1, GetNumTrainerServices() do
 		if select(3, GetTrainerServiceInfo(i)) == "available" then
@@ -132,7 +142,9 @@ function TA:ButtonPosition(disable)
 end
 
 function TA:ADDON_LOADED(_, addon)
-	if self.blockCallback or addon ~= "Blizzard_TrainerUI" then return end
+	if self.blockCallback or addon ~= "Blizzard_TrainerUI" then
+		return
+	end
 
 	self:ButtonCreate()
 	self:ButtonPosition()
@@ -149,9 +161,10 @@ function TA:ToggleState()
 				self:ADDON_LOADED(nil, "Blizzard_TrainerUI")
 			elseif E.private.skins.blizzard.enable and E.private.skins.blizzard.trainer then
 				if not self.skinCallback then
-					E:GetModule("Skins"):AddCallbackForAddon("Blizzard_TrainerUI", "Enhanced_Blizzard_TrainerUI_TrainAll", function()
-						self:ADDON_LOADED(nil, "Blizzard_TrainerUI")
-					end)
+					E:GetModule("Skins")
+						:AddCallbackForAddon("Blizzard_TrainerUI", "Enhanced_Blizzard_TrainerUI_TrainAll", function()
+							self:ADDON_LOADED(nil, "Blizzard_TrainerUI")
+						end)
 
 					self.skinCallback = true
 				else
@@ -188,7 +201,9 @@ function TA:ToggleState()
 end
 
 function TA:Initialize()
-	if not E.db.enhanced.general.trainAllSkills then return end
+	if not E.db.enhanced.general.trainAllSkills then
+		return
+	end
 
 	self:ToggleState()
 end

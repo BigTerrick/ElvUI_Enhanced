@@ -5,7 +5,9 @@ local _G = _G
 local band = bit.band
 
 S:AddCallbackForAddon("Blizzard_AchievementUI", "Enhanced_AchievementUI", function()
-	if not E.private.enhanced.animatedAchievementBars then return end
+	if not E.private.enhanced.animatedAchievementBars then
+		return
+	end
 
 	local function AnimationStatusBar(bar, noNumber)
 		bar.anim = CreateAnimationGroup(bar)
@@ -61,7 +63,9 @@ S:AddCallbackForAddon("Blizzard_AchievementUI", "Enhanced_AchievementUI", functi
 		local index = GameTooltip.shownStatusBars
 		local name = GameTooltip:GetName() .. "StatusBar" .. index
 		local statusBar = _G[name]
-		if not statusBar then return end
+		if not statusBar then
+			return
+		end
 
 		if not statusBar.anim then
 			AnimationStatusBar(statusBar)

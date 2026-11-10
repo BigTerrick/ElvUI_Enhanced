@@ -24,11 +24,14 @@ local function AddonList_HasAnyChanged()
 	for i = 1, GetNumAddOns() do
 		local _, _, _, enabled, _, reason = GetAddOnInfo(i)
 
-		if not ((enabled == status[i].enabled and not status[i].lod)
-		or reason == "DEP_DISABLED"
-		or status[i].reason == "DEP_DISABLED"
-		or (enabled and status[i].lod and not IsAddOnLoaded(i))
-		or (not enabled and status[i].lod and not IsAddOnLoaded(i)))
+		if
+			not (
+				(enabled == status[i].enabled and not status[i].lod)
+				or reason == "DEP_DISABLED"
+				or status[i].reason == "DEP_DISABLED"
+				or (enabled and status[i].lod and not IsAddOnLoaded(i))
+				or (not enabled and status[i].lod and not IsAddOnLoaded(i))
+			)
 		then
 			return true
 		end
@@ -43,7 +46,9 @@ end
 
 local function AddonList_IsDepsLoaded(...)
 	local depsCount = select("#", ...)
-	if depsCount == 0 then return end
+	if depsCount == 0 then
+		return
+	end
 
 	for i = 1, depsCount do
 		if not IsAddOnLoaded(select(i, ...)) then
@@ -66,17 +71,17 @@ local function AddonList_Update()
 
 	for i = 1, 20 do
 		addonIndex = ElvUI_AddonList.offset + i
-		entry = _G["ElvUI_AddonListEntry"..i]
+		entry = _G["ElvUI_AddonListEntry" .. i]
 
 		if addonIndex > numEntries then
 			entry:Hide()
 		else
 			local name, title, _, enabled, loadable, reason = GetAddOnInfo(addonIndex)
 
-			checkbox = _G["ElvUI_AddonListEntry"..i.."Enabled"]
+			checkbox = _G["ElvUI_AddonListEntry" .. i .. "Enabled"]
 			checkbox:SetChecked(enabled)
 
-			status = _G["ElvUI_AddonListEntry"..i.."Title"]
+			status = _G["ElvUI_AddonListEntry" .. i .. "Title"]
 
 			if loadable or (enabled and (reason == "DEP_DEMAND_LOADED" or reason == "DEMAND_LOADED")) then
 				status:SetTextColor(1.0, 0.78, 0.0)
@@ -92,14 +97,18 @@ local function AddonList_Update()
 				status:SetText(name)
 			end
 
-			status = _G["ElvUI_AddonListEntry"..i.."Status"]
+			status = _G["ElvUI_AddonListEntry" .. i .. "Status"]
 			if not loadable and reason then
-				status:SetText(_G["ADDON_"..reason])
+				status:SetText(_G["ADDON_" .. reason])
 			else
 				status:SetText("")
 			end
 
-			if enabled ~= ElvUI_AddonList.startStatus[addonIndex].enabled and reason ~= "DEP_DISABLED" and ElvUI_AddonList.startStatus[addonIndex].reason ~= "DEP_DISABLED" then
+			if
+				enabled ~= ElvUI_AddonList.startStatus[addonIndex].enabled
+				and reason ~= "DEP_DISABLED"
+				and ElvUI_AddonList.startStatus[addonIndex].reason ~= "DEP_DISABLED"
+			then
 				if enabled then
 					if AddonList_IsAddOnLoadOnDemand(addonIndex) then
 						if AddonList_IsDepsLoaded(GetAddOnDependencies(addonIndex)) then
@@ -146,7 +155,9 @@ local function AddonList_Enable(index, enabled)
 end
 
 local function AddonList_LoadAddOn(index)
-	if not AddonList_IsAddOnLoadOnDemand(index) then return end
+	if not AddonList_IsAddOnLoadOnDemand(index) then
+		return
+	end
 
 	LoadAddOn(index)
 
@@ -160,14 +171,16 @@ end
 
 local function AddonTooltip_BuildDeps(...)
 	local depsCount = select("#", ...)
-	if depsCount == 0 then return end
+	if depsCount == 0 then
+		return
+	end
 
 	local deps
 
 	if depsCount == 1 then
 		deps = ...
 	elseif depsCount > 1 then
-		deps = tconcat({...}, ", ")
+		deps = tconcat({ ... }, ", ")
 	end
 
 	return L["Dependencies: "] .. deps
@@ -175,7 +188,9 @@ end
 
 local function AddonTooltip_Update(self)
 	local name, title, notes, _, _, security = GetAddOnInfo(self.id)
-	if not name then return end
+	if not name then
+		return
+	end
 
 	GameTooltip:SetOwner(self)
 
@@ -200,7 +215,9 @@ local function AddonTooltip_Update(self)
 end
 
 function mod:AddonList()
-	if IsAddOnLoaded("ACP") then return end
+	if IsAddOnLoaded("ACP") then
+		return
+	end
 
 	local S = E:GetModule("Skins")
 
@@ -224,7 +241,7 @@ function mod:AddonList()
 		addonList.startStatus[i] = {
 			enabled = enabled,
 			reason = reason,
-			lod = IsAddOnLoadOnDemand(i)
+			lod = IsAddOnLoadOnDemand(i),
 		}
 	end
 
@@ -295,7 +312,7 @@ function mod:AddonList()
 	scrollFrame:SetTemplate("Transparent")
 	scrollFrame:Point("TOPLEFT", 8, -25)
 	scrollFrame:Point("BOTTOMRIGHT", -29, 37)
-	scrollFrame.scrollBar = _G[scrollFrame:GetName().."ScrollBar"]
+	scrollFrame.scrollBar = _G[scrollFrame:GetName() .. "ScrollBar"]
 	S:HandleScrollBar(scrollFrame.scrollBar)
 
 	scrollFrame.scrollBar:Point("TOPLEFT", scrollFrame, "TOPRIGHT", 3, -19)
@@ -322,7 +339,7 @@ function mod:AddonList()
 
 	local addonListEntry = {}
 	for i = 1, 20 do
-		addonListEntry[i] = CreateFrame("Button", "ElvUI_AddonListEntry"..i, scrollFrame)
+		addonListEntry[i] = CreateFrame("Button", "ElvUI_AddonListEntry" .. i, scrollFrame)
 		addonListEntry[i]:Size(scrollFrame:GetWidth() - 8, 16)
 		addonListEntry[i].id = i
 
@@ -380,13 +397,13 @@ function mod:AddonList()
 	end)
 
 	local point, relativeTo, relativePoint, x, y = _G.GameMenuButtonMacros:GetPoint(1)
-	if (relativeTo and relativeTo ~= buttonAddons) then
+	if relativeTo and relativeTo ~= buttonAddons then
 		buttonAddons:SetPoint(point, relativeTo, relativePoint, x, y)
 	end
 
 	local btnFilter = {
 		["GameMenuButtonLogout"] = true,
-		["GameMenuButtonContinue"] = true
+		["GameMenuButtonContinue"] = true,
 	}
 
 	-- Cache frequently used values
@@ -405,7 +422,7 @@ function mod:AddonList()
 		end
 
 		local buttonCount = 0
-		for _, button in ipairs({self:GetChildren()}) do
+		for _, button in ipairs({ self:GetChildren() }) do
 			if button:IsShown() and button:GetObjectType() == "Button" then
 				buttonCount = buttonCount + 1
 				buttons[buttonCount] = button
@@ -413,7 +430,9 @@ function mod:AddonList()
 		end
 
 		-- Exit early if no buttons
-		if buttonCount == 0 then return end
+		if buttonCount == 0 then
+			return
+		end
 
 		-- Sort by Y position (top to bottom) - cache GetCenter calls
 		table.sort(buttons, function(a, b)
@@ -428,7 +447,9 @@ function mod:AddonList()
 
 		-- Re-anchor buttons and track positions in single loop
 		for i, btn in ipairs(buttons) do
-			if i > buttonCount then break end
+			if i > buttonCount then
+				break
+			end
 
 			local btnName = btn:GetName()
 			btn:ClearAllPoints()
@@ -438,7 +459,7 @@ function mod:AddonList()
 				firstTop = btn:GetTop()
 			else
 				local spacing = btnFilter[btnName] and -btnHeight or SPACING
-				btn:SetPoint("TOP", buttons[i-1], "BOTTOM", 0, spacing)
+				btn:SetPoint("TOP", buttons[i - 1], "BOTTOM", 0, spacing)
 			end
 
 			-- Update lastBottom for final button

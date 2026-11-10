@@ -1,11 +1,12 @@
-local E = unpack(ElvUI); --Import: Engine, Locales, PrivateDB, ProfileDB, GlobalDB
+local E = unpack(ElvUI) --Import: Engine, Locales, PrivateDB, ProfileDB, GlobalDB
 local L = E.Libs.ACL:NewLocale("ElvUI", "zhTW")
 
 -- DESC locales
 L["ENH_LOGIN_MSG"] = "您正在使用 |cff1784d1ElvUI|r |cff1784d1Enhanced|r |cffff8000(WotLK)|r version %s%s|r."
 L["DURABILITY_DESC"] = "調整設置人物窗口裝備耐久度顯示."
 L["ITEMLEVEL_DESC"] = "調整在角色資訊上顯示物品裝等的各種設定."
-L["WATCHFRAME_DESC"] = "Adjust the settings for the visibility of the watchframe (questlog) to your personal preference."
+L["WATCHFRAME_DESC"] =
+	"Adjust the settings for the visibility of the watchframe (questlog) to your personal preference."
 
 -- Incompatibility
 L["GearScore '3.1.20b - Release' is not for WotLK. Download 3.1.7. Disable this version?"] = true
@@ -61,7 +62,8 @@ L["Pet Background"] = true
 
 -- Equipment
 L["Damaged Only"] = "受損顯示"
-L["Enable/Disable the display of durability information on the character screen."] = "開啓/關閉 人物窗口裝備耐久度顯示."
+L["Enable/Disable the display of durability information on the character screen."] =
+	"開啓/關閉 人物窗口裝備耐久度顯示."
 L["Enable/Disable the display of item levels on the character screen."] = "在角色資訊上顯示各裝備裝等"
 L["Only show durabitlity information for items that are damaged."] = "只在裝備受損時顯示耐久度."
 L["Quality Color"] = true
@@ -72,12 +74,17 @@ L["Add button to Trainer frame with ability to train all available skills in one
 L["Alt-Click Merchant"] = true
 L["Already Known"] = true
 L["Animated Achievement Bars"] = true
-L["Automatically change your watched faction on the reputation bar to the faction you got reputation points for."] = "當你獲得某個陣營的聲望時, 將自動追蹤此陣營的聲望至經驗值欄位."
+L["Automatically change your watched faction on the reputation bar to the faction you got reputation points for."] =
+	"當你獲得某個陣營的聲望時, 將自動追蹤此陣營的聲望至經驗值欄位."
 L["Automatically release body when killed inside a battleground."] = "在戰場死亡後自動釋放靈魂."
-L["Automatically select the quest reward with the highest vendor sell value."] = "自動選取有最高賣價的任務獎勵物品"
+L["Automatically select the quest reward with the highest vendor sell value."] =
+	"自動選取有最高賣價的任務獎勵物品"
 L["Change color of item icons which already known."] = true
 L["Changes the transparency of all the movers."] = "改變所有定位器的透明度"
+L["Color quests by difficulty and progress in the Quest Tracker."] = true
+L["Colorize Quests"] = true
 L["Display quest levels at Quest Log."] = true
+L["Display quest levels at Quest Tracker."] = true
 L["Hide Zone Text"] = true
 L["Holding Alt key while buying something from vendor will now buy an entire stack."] = true
 L["Mover Transparency"] = "定位器透明度"
@@ -112,7 +119,8 @@ L["Toggle Location Digits."] = true
 L["Location Digits"] = "坐標位數"
 L["Location Panel"] = true
 L["Number of digits for map location."] = "坐標顯示的小數位數"
-L["The time to wait before fading the minimap back in after combat hide. (0 = Disabled)"] = "戰鬥開始後隱藏小地圖前的延遲時間 (0=停用)"
+L["The time to wait before fading the minimap back in after combat hide. (0 = Disabled)"] =
+	"戰鬥開始後隱藏小地圖前的延遲時間 (0=停用)"
 L["Toggle Location Panel."] = true
 
 -- Timer Tracker
@@ -121,7 +129,8 @@ L["Hook DBM"] = true
 
 -- Tooltip
 L["Check Player"] = true
-L["Check achievement completion instead of boss kill stats.\nSome servers log incorrect boss kill statistics, this is an alternative way to get player progress."] = true
+L["Check achievement completion instead of boss kill stats.\nSome servers log incorrect boss kill statistics, this is an alternative way to get player progress."] =
+	true
 L["Colorize the tooltip border based on item quality."] = true
 L["Icecrown Citadel"] = true
 L["Item Border Color"] = true

@@ -25,118 +25,118 @@ local UnitLevel = UnitLevel
 
 local MAX_PLAYER_LEVEL = MAX_PLAYER_LEVEL
 
-local difficulties = {"H25", "H10", "N25", "N10"}
+local difficulties = { "H25", "H10", "N25", "N10" }
 
 local statisticTiers = {
 	["RS"] = {
-		{4823},	-- Heroic 25
-		{4822},	-- Heroic 10
-		{4820},	-- Normal 25
-		{4821}	-- Normal 10
+		{ 4823 }, -- Heroic 25
+		{ 4822 }, -- Heroic 10
+		{ 4820 }, -- Normal 25
+		{ 4821 }, -- Normal 10
 	},
 	["ICC"] = {
-		{4642, 4656, 4661, 4664, 4667, 4670, 4673, 4676, 4679, 4682, 4685, 4688},	-- Heroic 25
-		{4640, 4654, 4659, 4662, 4665, 4668, 4671, 4674, 4677, 4680, 4684, 4686},	-- Heroic 10
-		{4641, 4655, 4660, 4663, 4666, 4669, 4672, 4675, 4678, 4681, 4683, 4687},	-- Normal 25
-		{4639, 4643, 4644, 4645, 4646, 4647, 4648, 4649, 4650, 4651, 4652, 4653}	-- Normal 10
+		{ 4642, 4656, 4661, 4664, 4667, 4670, 4673, 4676, 4679, 4682, 4685, 4688 }, -- Heroic 25
+		{ 4640, 4654, 4659, 4662, 4665, 4668, 4671, 4674, 4677, 4680, 4684, 4686 }, -- Heroic 10
+		{ 4641, 4655, 4660, 4663, 4666, 4669, 4672, 4675, 4678, 4681, 4683, 4687 }, -- Normal 25
+		{ 4639, 4643, 4644, 4645, 4646, 4647, 4648, 4649, 4650, 4651, 4652, 4653 }, -- Normal 10
 	},
 	["ToC"] = {
-		{4029, 4035, 4039, 4043, 4047},	-- Heroic 25
-		{4030, 4033, 4037, 4041, 4045},	-- Heroic 10
-		{4031, 4034, 4038, 4042, 4046},	-- Normal 25
-		{4028, 4032, 4036, 4040, 4044}	-- Normal 10
+		{ 4029, 4035, 4039, 4043, 4047 }, -- Heroic 25
+		{ 4030, 4033, 4037, 4041, 4045 }, -- Heroic 10
+		{ 4031, 4034, 4038, 4042, 4046 }, -- Normal 25
+		{ 4028, 4032, 4036, 4040, 4044 }, -- Normal 10
 	},
 	["Ulduar"] = {
 		{},
 		{},
-		{2872, 2873, 2874, 2884, 2885, 2875, 2882, 3256, 3257, 3258, 2879, 2880, 2883, 2881},	-- Normal 25
-		{2856, 2857, 2858, 2859, 2860, 2861, 2868, 2862, 2863, 2864, 2865, 2866, 2869, 2867}	-- Normal 10
-	}
+		{ 2872, 2873, 2874, 2884, 2885, 2875, 2882, 3256, 3257, 3258, 2879, 2880, 2883, 2881 }, -- Normal 25
+		{ 2856, 2857, 2858, 2859, 2860, 2861, 2868, 2862, 2863, 2864, 2865, 2866, 2869, 2867 }, -- Normal 10
+	},
 }
 
 local achievementTiers = {
 	["RS"] = {
-		{	-- Heroic 25
-			4816	-- [1] Heroic: The Twilight Destroyer
+		{ -- Heroic 25
+			4816, -- [1] Heroic: The Twilight Destroyer
 		},
-		{	-- Heroic 10
-			4818	-- [1] Heroic: The Twilight Destroyer
+		{ -- Heroic 10
+			4818, -- [1] Heroic: The Twilight Destroyer
 		},
-		{	-- Normal 25
-			4815	-- [1] The Twilight Destroyer
+		{ -- Normal 25
+			4815, -- [1] The Twilight Destroyer
 		},
-		{	-- Normal 10
-			4817	-- [1] The Twilight Destroyer
-		}
+		{ -- Normal 10
+			4817, -- [1] The Twilight Destroyer
+		},
 	},
 	["ICC"] = {
-		{	-- Heroic 25
-		--	[0] = 4637,	-- [12] Heroic: Fall of the Lich King
-			4632,	-- [4] Heroic: Storming the Citadel
-			4633,	-- [3] Heroic: The Plagueworks
-			4634,	-- [2] Heroic: The Crimson Hall
-			4635,	-- [2] Heroic: The Frostwing Halls
-			4584	-- [1] The Light of Dawn
+		{ -- Heroic 25
+			--	[0] = 4637,	-- [12] Heroic: Fall of the Lich King
+			4632, -- [4] Heroic: Storming the Citadel
+			4633, -- [3] Heroic: The Plagueworks
+			4634, -- [2] Heroic: The Crimson Hall
+			4635, -- [2] Heroic: The Frostwing Halls
+			4584, -- [1] The Light of Dawn
 		},
-		{	-- Heroic 10
-		--	[0] = 4636,	-- [12] Heroic: Fall of the Lich King
-			4628,	-- [4] Heroic: Storming the Citadel
-			4629,	-- [3] Heroic: The Plagueworks
-			4630,	-- [2] Heroic: The Crimson Hall
-			4631,	-- [2] Heroic: The Frostwing Halls
-			4583	-- [1] Bane of the Fallen King
+		{ -- Heroic 10
+			--	[0] = 4636,	-- [12] Heroic: Fall of the Lich King
+			4628, -- [4] Heroic: Storming the Citadel
+			4629, -- [3] Heroic: The Plagueworks
+			4630, -- [2] Heroic: The Crimson Hall
+			4631, -- [2] Heroic: The Frostwing Halls
+			4583, -- [1] Bane of the Fallen King
 		},
-		{	-- Normal 25
-		--	[0] = 4608,	-- [12] Fall of the Lich King
-			4604,	-- [4] Storming the Citadel
-			4605,	-- [3] The Plagueworks
-			4606,	-- [2] The Crimson Hall
-			4607,	-- [2] The Frostwing Halls
-			4597	-- [1] The Frozen Throne
+		{ -- Normal 25
+			--	[0] = 4608,	-- [12] Fall of the Lich King
+			4604, -- [4] Storming the Citadel
+			4605, -- [3] The Plagueworks
+			4606, -- [2] The Crimson Hall
+			4607, -- [2] The Frostwing Halls
+			4597, -- [1] The Frozen Throne
 		},
-		{	-- Normal 10
-		--	[0] = 4532,	-- [12] Fall of the Lich King
-			4531,	-- [4] Storming the Citadel
-			4528,	-- [3] The Plagueworks
-			4529,	-- [2] The Crimson Hall
-			4527,	-- [2] The Frostwing Halls
-			4530	-- [1] The Frozen Throne
-		}
+		{ -- Normal 10
+			--	[0] = 4532,	-- [12] Fall of the Lich King
+			4531, -- [4] Storming the Citadel
+			4528, -- [3] The Plagueworks
+			4529, -- [2] The Crimson Hall
+			4527, -- [2] The Frostwing Halls
+			4530, -- [1] The Frozen Throne
+		},
 	},
 	["ToC"] = {
-		{	-- Heroic 25
-			3812	-- [5] Call of the Grand Crusade
+		{ -- Heroic 25
+			3812, -- [5] Call of the Grand Crusade
 		},
-		{	-- Heroic 10
-			3918	-- [5] Call of the Grand Crusade
+		{ -- Heroic 10
+			3918, -- [5] Call of the Grand Crusade
 		},
-		{	-- Normal 25
-			3916	-- [5] Call of the Crusade
+		{ -- Normal 25
+			3916, -- [5] Call of the Crusade
 		},
-		{	-- Normal 10
-			3917	-- [5] Call of the Crusade
-		}
+		{ -- Normal 10
+			3917, -- [5] Call of the Crusade
+		},
 	},
 	["Ulduar"] = {
 		{},
 		{},
-		{	-- Normal 25
-		--	[0] = 2895,	-- [13] The Secrets of Ulduar
-			2887,	-- [4] The Siege of Ulduar
-			2889,	-- [3] The Antechamber of Ulduar
-			2891,	-- [4] The Keepers of Ulduar
-			2893,	-- [2] The Descent into Madness
-			3037	-- [1] Observed
+		{ -- Normal 25
+			--	[0] = 2895,	-- [13] The Secrets of Ulduar
+			2887, -- [4] The Siege of Ulduar
+			2889, -- [3] The Antechamber of Ulduar
+			2891, -- [4] The Keepers of Ulduar
+			2893, -- [2] The Descent into Madness
+			3037, -- [1] Observed
 		},
-		{	-- Normal 10
-		--	[0] = 2894,		-- [13] The Secrets of Ulduar
-			2886,	-- [4] The Siege of Ulduar
-			2888,	-- [3] The Antechamber of Ulduar
-			2890,	-- [4] The Keepers of Ulduar
-			2892,	-- [2] The Descent into Madness
-			3036	-- [1] Observed
-		}
-	}
+		{ -- Normal 10
+			--	[0] = 2894,		-- [13] The Secrets of Ulduar
+			2886, -- [4] The Siege of Ulduar
+			2888, -- [3] The Antechamber of Ulduar
+			2890, -- [4] The Keepers of Ulduar
+			2892, -- [2] The Descent into Madness
+			3036, -- [1] Observed
+		},
+	},
 }
 
 local progressCache = {}
@@ -232,7 +232,9 @@ local function UpdateProgression(guid)
 end
 
 local function SetProgressionInfo(guid, tt)
-	if not progressCache[guid] then return end
+	if not progressCache[guid] then
+		return
+	end
 
 	local tiers = E.db.enhanced.tooltip.progressInfo.checkAchievements and achievementTiers or statisticTiers
 
@@ -240,7 +242,16 @@ local function SetProgressionInfo(guid, tt)
 		if E.db.enhanced.tooltip.progressInfo.tiers[tier] then
 			for i = 1, #difficulties do
 				if #tiers[tier][i] > 0 then
-					tt:AddDoubleLine(progressCache[guid].header[tier][i], progressCache[guid].info[tier][i], nil, nil, nil, 1, 1, 1)
+					tt:AddDoubleLine(
+						progressCache[guid].header[tier][i],
+						progressCache[guid].info[tier][i],
+						nil,
+						nil,
+						nil,
+						1,
+						1,
+						1
+					)
 				end
 			end
 		end
@@ -248,26 +259,45 @@ local function SetProgressionInfo(guid, tt)
 end
 
 local function ShowInspectInfo(tt)
-	if InCombatLockdown() then return end
+	if InCombatLockdown() then
+		return
+	end
 
 	local modifier = E.db.enhanced.tooltip.progressInfo.modifier
-	if modifier ~= "ALL" and not ((modifier == "SHIFT" and IsShiftKeyDown()) or (modifier == "CTRL" and IsControlKeyDown()) or (modifier == "ALT" and IsAltKeyDown())) then return end
+	if
+		modifier ~= "ALL"
+		and not (
+			(modifier == "SHIFT" and IsShiftKeyDown())
+			or (modifier == "CTRL" and IsControlKeyDown())
+			or (modifier == "ALT" and IsAltKeyDown())
+		)
+	then
+		return
+	end
 
 	local unit = select(2, tt:GetUnit())
 	if unit == "player" then
-		if not E.db.enhanced.tooltip.progressInfo.checkPlayer then return end
+		if not E.db.enhanced.tooltip.progressInfo.checkPlayer then
+			return
+		end
 
 		UpdateProgression(E.myguid)
 		SetProgressionInfo(E.myguid, tt)
 		return
 	end
 
-	if not unit or not UnitIsPlayer(unit) then return end
+	if not unit or not UnitIsPlayer(unit) then
+		return
+	end
 
 	local level = UnitLevel(unit)
-	if not level or level < MAX_PLAYER_LEVEL then return end
+	if not level or level < MAX_PLAYER_LEVEL then
+		return
+	end
 
-	if not CanInspect(unit, false) then return end
+	if not CanInspect(unit, false) then
+		return
+	end
 
 	local guid = UnitGUID(unit)
 	local frameShowen = AchievementFrame and AchievementFrame:IsShown()
@@ -359,7 +389,9 @@ function PI:ToggleState()
 end
 
 function PI:Initialize()
-	if not E.db.enhanced.tooltip.progressInfo.enable then return end
+	if not E.db.enhanced.tooltip.progressInfo.enable then
+		return
+	end
 
 	self.progressCache = progressCache
 	self:ToggleState()
